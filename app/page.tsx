@@ -1,33 +1,6 @@
 import Link from "next/link";
+import { seoPages } from "@/lib/seo-pages";
 import "./index.css";
-
-const pages = [
-  {
-    title: "Дикторы",
-    description: "Основной каталог голосов с поиском, фильтрами и примерами.",
-    href: "/diktory",
-  },
-  {
-    title: "Актёры дубляжа",
-    description: "Голоса кино, сериалов, мультфильмов и игр.",
-    href: "/diktory/dubbing",
-  },
-  {
-    title: "Известные дикторы",
-    description: "Федеральные голоса телевидения, радио и крупных брендов.",
-    href: "/diktory/izvestnye_golosa",
-  },
-  {
-    title: "Женские голоса",
-    description: "Профессиональные женские голоса для текста, видео и рекламы.",
-    href: "/diktory/zhenskie_golosa",
-  },
-  {
-    title: "Локализация",
-    description: "Перевод и адаптация контента для разных языков и рынков.",
-    href: "/perevod",
-  },
-] as const;
 
 export default function PageIndex() {
   return (
@@ -37,7 +10,7 @@ export default function PageIndex() {
         <p>Выберите страницу для просмотра.</p>
       </header>
       <section className="page-index__grid" aria-label="Список страниц">
-        {pages.map((page) => (
+        {seoPages.map((page) => (
           <Link
             className="page-card"
             href={page.href}
@@ -48,7 +21,10 @@ export default function PageIndex() {
               <h2>{page.title}</h2>
               <p>{page.description}</p>
             </div>
-            <span className="page-card__action" aria-hidden="true">Открыть <b>→</b></span>
+            <div className="page-card__footer">
+              <span className="page-card__action" aria-hidden="true">Открыть <b>→</b></span>
+              <code className="page-card__source">{page.sourceFile}</code>
+            </div>
           </Link>
         ))}
       </section>

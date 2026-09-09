@@ -1,16 +1,19 @@
 import Link from "next/link";
 import type { SeoDocumentKey } from "@/lib/seo-page-config";
+import { seoPages } from "@/lib/seo-pages";
 
 const pageLinks: ReadonlyArray<{
   href: string;
   label: string;
   documentKey?: SeoDocumentKey;
+  sourceFile?: string;
 }> = [
-  { href: "/diktory", label: "Все дикторы", documentKey: "diktory" },
-  { href: "/diktory/dubbing", label: "Актёры дубляжа", documentKey: "dubbing" },
-  { href: "/diktory/izvestnye_golosa", label: "Известные дикторы", documentKey: "famous" },
-  { href: "/diktory/zhenskie_golosa", label: "Женские голоса", documentKey: "women" },
-  { href: "/perevod", label: "Локализация", documentKey: "localization" },
+  ...seoPages.map((page) => ({
+    href: page.href,
+    label: page.navigationLabel,
+    documentKey: page.documentKey,
+    sourceFile: page.sourceFile,
+  })),
   { href: "/", label: "← В дашборд" },
 ];
 
@@ -38,24 +41,39 @@ function HeaderLink({
   href,
   label,
   active,
+  sourceFile,
   mobile = false,
 }: {
   href: string;
   label: string;
   active: boolean;
+  sourceFile?: string;
   mobile?: boolean;
 }) {
   return (
     <Link
       className={
         mobile
-          ? `rounded-xl px-4 py-3 transition-colors ${active ? "bg-white text-[#a63c28]" : "text-white hover:bg-white/15"}`
-          : `whitespace-nowrap rounded-xl px-2.5 py-2.5 transition-colors ${active ? "bg-white/20 text-white" : "text-white/85 hover:bg-white/12 hover:text-white"}`
+          ? `flex min-h-[54px] flex-col items-start justify-center rounded-xl px-4 py-2.5 transition-colors ${active ? "bg-white text-[#a63c28]" : "text-white hover:bg-white/15"}`
+          : `flex min-h-[48px] flex-col items-start justify-center whitespace-nowrap rounded-xl px-2.5 py-1.5 transition-colors ${active ? "bg-white/20 text-white" : "text-white/85 hover:bg-white/12 hover:text-white"}`
       }
       href={href}
+      aria-label={label}
       aria-current={active ? "page" : undefined}
     >
-      {label}
+      <span>{label}</span>
+      {sourceFile ? (
+        <span
+          className={
+            mobile
+              ? `mt-0.5 break-all font-mono text-[10px] font-medium leading-4 ${active ? "text-[#a63c28]/65" : "text-white/55"}`
+              : "mt-0.5 block max-w-[180px] truncate font-mono text-[9px] font-medium leading-3 text-white/55"
+          }
+          title={sourceFile}
+        >
+          {sourceFile}
+        </span>
+      ) : null}
     </Link>
   );
 }
@@ -78,6 +96,7 @@ export function SiteHeader({ documentKey }: { documentKey: SeoDocumentKey }) {
               href={link.href}
               label={link.label}
               active={link.documentKey === documentKey}
+              sourceFile={link.sourceFile}
             />
           ))}
         </nav>
@@ -99,6 +118,7 @@ export function SiteHeader({ documentKey }: { documentKey: SeoDocumentKey }) {
                 href={link.href}
                 label={link.label}
                 active={link.documentKey === documentKey}
+                sourceFile={link.sourceFile}
                 mobile
               />
             ))}

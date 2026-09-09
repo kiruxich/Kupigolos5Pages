@@ -103,10 +103,25 @@ body:has(.page-index) {
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  margin-top: 32px;
   color: #f54622;
   font-size: .82rem;
   font-weight: 800;
+}
+
+.page-card__footer {
+  margin-top: 32px;
+}
+
+.page-card__source {
+  display: block;
+  margin-top: 12px;
+  color: #7d85a6;
+  font: 600 .72rem/1.45 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  overflow-wrap: anywhere;
+}
+
+.page-card:last-child .page-card__source {
+  color: rgba(248, 248, 251, .52);
 }
 
 .page-card__action b {

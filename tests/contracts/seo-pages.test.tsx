@@ -69,6 +69,11 @@ describe("shared SEO header", () => {
     );
     expect(navigation.getByRole("link", { name: "Локализация" })).toHaveAttribute("href", "/perevod");
     expect(navigation.getByRole("link", { name: "← В дашборд" })).toHaveAttribute("href", "/");
+    expect(navigation.getByText("kupigolos-diktory-seo.html")).toBeInTheDocument();
+    expect(navigation.getByText("kupigolos-aktery-dublyazha.html")).toBeInTheDocument();
+    expect(navigation.getByText("kupigolos-izvestnye-diktory-seo-prototype.html")).toBeInTheDocument();
+    expect(navigation.getByText("kupigolos-zhenskie-golosa-seo.html")).toBeInTheDocument();
+    expect(navigation.getByText("kupigolos-lokalizaciya-kontenta-seo.html")).toBeInTheDocument();
     expect(screen.queryByRole("link", { name: "Обсудить проект" })).not.toBeInTheDocument();
     expect(container.querySelector('a[href^="tel:"]')).not.toBeInTheDocument();
   });
