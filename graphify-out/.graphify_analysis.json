@@ -117,18 +117,20 @@
       "components_seo_catalog_runtime_women"
     ],
     "7": [
+      "app_page",
+      "app_page_pageindex",
+      "app_page_pages",
+      "tests_contracts_page_index_test"
+    ],
+    "8": [
       "app_layout",
       "app_layout_metadata",
       "app_layout_rootlayout"
     ],
-    "8": [
+    "9": [
       "components_seo_site_header",
       "components_seo_site_header_logo",
       "components_seo_site_header_siteheader"
-    ],
-    "9": [
-      "app_page",
-      "app_page_sixpagespage"
     ],
     "10": [
       "next_config",
@@ -159,7 +161,7 @@
     "6": 0.4666666666666667,
     "7": 0.6666666666666666,
     "8": 0.6666666666666666,
-    "9": 1.0,
+    "9": 0.6666666666666666,
     "10": 1.0,
     "11": 1.0,
     "12": 1.0,
@@ -183,13 +185,13 @@
       "degree": 6
     },
     {
-      "id": "package_scripts",
-      "label": "scripts",
+      "id": "tsconfig_include",
+      "label": "include",
       "degree": 6
     },
     {
-      "id": "tsconfig_include",
-      "label": "include",
+      "id": "package_scripts",
+      "label": "scripts",
       "degree": 6
     },
     {
@@ -208,13 +210,13 @@
       "degree": 4
     },
     {
-      "id": "components_seo_catalog_runtime_normalized",
-      "label": "normalized()",
+      "id": "lib_seo_page_config_seodocumentkey",
+      "label": "SeoDocumentKey",
       "degree": 2
     },
     {
-      "id": "components_seo_catalog_runtime_pricefrom",
-      "label": "priceFrom()",
+      "id": "components_seo_site_footer_contactsection",
+      "label": "ContactSection()",
       "degree": 2
     }
   ],
