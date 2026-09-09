@@ -6,10 +6,10 @@
     "semantic_hash": "4a876116d76e308e6044722398e5c269"
   },
   "app/page.tsx": {
-    "mtime": 1788949641.1052306,
-    "seen": 1788950804.952171,
-    "ast_hash": "004eb4a70e7c85c29be14ccc569a15dc",
-    "semantic_hash": "004eb4a70e7c85c29be14ccc569a15dc"
+    "mtime": 1788951921.0,
+    "seen": 1788952079.5670881,
+    "ast_hash": "103a21a35139ed8cc89594e0d15945e9",
+    "semantic_hash": "103a21a35139ed8cc89594e0d15945e9"
   },
   "next-env.d.ts": {
     "mtime": 1788949640.696433,
@@ -24,15 +24,105 @@
     "semantic_hash": "1cf426a4742119cb70565236ed18995a"
   },
   "package.json": {
-    "mtime": 1788949640.5356193,
-    "seen": 1788950804.952173,
-    "ast_hash": "62519fd4bdd63df77baaf181259f5e26",
-    "semantic_hash": "62519fd4bdd63df77baaf181259f5e26"
+    "mtime": 1788951960.9153194,
+    "seen": 1788952079.567163,
+    "ast_hash": "864584939fc2a7b437315ef87bccbbd7",
+    "semantic_hash": "864584939fc2a7b437315ef87bccbbd7"
   },
   "tsconfig.json": {
-    "mtime": 1788949640.7806487,
-    "seen": 1788950804.9521742,
-    "ast_hash": "8380eb053bbf56efd5969f7e4a8645fc",
-    "semantic_hash": "8380eb053bbf56efd5969f7e4a8645fc"
+    "mtime": 1788948905.0,
+    "seen": 1788952079.5671659,
+    "ast_hash": "708efb461745088a65964a9708af3f48",
+    "semantic_hash": "708efb461745088a65964a9708af3f48"
+  },
+  "app/diktory/dubbing/page.tsx": {
+    "mtime": 1788948905.0,
+    "seen": 1788952079.56703,
+    "ast_hash": "1e1b1038e21d37fb1016e383e15a675e",
+    "semantic_hash": "1e1b1038e21d37fb1016e383e15a675e"
+  },
+  "app/diktory/izvestnye_golosa/page.tsx": {
+    "mtime": 1788948905.0,
+    "seen": 1788952079.567034,
+    "ast_hash": "7a2f479479f4dc5e93c5d8ced5af4186",
+    "semantic_hash": "7a2f479479f4dc5e93c5d8ced5af4186"
+  },
+  "app/diktory/page.tsx": {
+    "mtime": 1788948905.0,
+    "seen": 1788952079.567036,
+    "ast_hash": "e9b19b63a5908482797a6be9cca17707",
+    "semantic_hash": "e9b19b63a5908482797a6be9cca17707"
+  },
+  "app/diktory/zhenskie_golosa/page.tsx": {
+    "mtime": 1788948905.0,
+    "seen": 1788952079.5670369,
+    "ast_hash": "e0329f744133fddefa185ba50528ca48",
+    "semantic_hash": "e0329f744133fddefa185ba50528ca48"
+  },
+  "app/perevod/page.tsx": {
+    "mtime": 1788948905.0,
+    "seen": 1788952079.5670888,
+    "ast_hash": "f8826ed4ec37dcbbeba258faf4e7279f",
+    "semantic_hash": "f8826ed4ec37dcbbeba258faf4e7279f"
+  },
+  "components/seo/catalog-runtime.tsx": {
+    "mtime": 1788948905.0,
+    "seen": 1788952079.56709,
+    "ast_hash": "46c591c88b54ccbd34c997827d549603",
+    "semantic_hash": "46c591c88b54ccbd34c997827d549603"
+  },
+  "components/seo/seo-page.tsx": {
+    "mtime": 1788948905.0,
+    "seen": 1788952079.567092,
+    "ast_hash": "4b1edb8acc0a6ae2d62581dcf110c22b",
+    "semantic_hash": "4b1edb8acc0a6ae2d62581dcf110c22b"
+  },
+  "components/seo/site-footer.tsx": {
+    "mtime": 1788948905.0,
+    "seen": 1788952079.567093,
+    "ast_hash": "0d91d6ad0317f49134815e567c046290",
+    "semantic_hash": "0d91d6ad0317f49134815e567c046290"
+  },
+  "components/seo/site-header.tsx": {
+    "mtime": 1788948905.0,
+    "seen": 1788952079.567094,
+    "ast_hash": "3e8579b9a280c9fcf2bcc558db5b22c9",
+    "semantic_hash": "3e8579b9a280c9fcf2bcc558db5b22c9"
+  },
+  "lib/seo-documents.ts": {
+    "mtime": 1788948905.0,
+    "seen": 1788952079.567095,
+    "ast_hash": "01e587682527cda4dd3c3472a4aff433",
+    "semantic_hash": "01e587682527cda4dd3c3472a4aff433"
+  },
+  "lib/seo-page-config.ts": {
+    "mtime": 1788948905.0,
+    "seen": 1788952079.567096,
+    "ast_hash": "5abd23ceb7709971b7995b05bee4114b",
+    "semantic_hash": "5abd23ceb7709971b7995b05bee4114b"
+  },
+  "postcss.config.mjs": {
+    "mtime": 1788948905.0,
+    "seen": 1788952079.567164,
+    "ast_hash": "239f3ebf717465dc636818a1a619398d",
+    "semantic_hash": "239f3ebf717465dc636818a1a619398d"
+  },
+  "tests/contracts/seo-pages.test.tsx": {
+    "mtime": 1788948905.0,
+    "seen": 1788952079.567165,
+    "ast_hash": "5ba0de1fcb53ae8ddb4df1e6a339d939",
+    "semantic_hash": "5ba0de1fcb53ae8ddb4df1e6a339d939"
+  },
+  "vitest.config.ts": {
+    "mtime": 1788948968.0,
+    "seen": 1788952079.567167,
+    "ast_hash": "854d82a25c0b162e3b181ecfba3a99e0",
+    "semantic_hash": "854d82a25c0b162e3b181ecfba3a99e0"
+  },
+  "vitest.setup.ts": {
+    "mtime": 1788948905.0,
+    "seen": 1788952079.567169,
+    "ast_hash": "5380e1ce4a4cda50372eda3ae6b17e04",
+    "semantic_hash": "5380e1ce4a4cda50372eda3ae6b17e04"
   }
 }
