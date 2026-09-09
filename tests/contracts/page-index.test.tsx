@@ -6,10 +6,6 @@ describe("five page index", () => {
   it("renders five cards with their local destinations", () => {
     render(<PageIndex />);
 
-    expect(screen.getByRole("link", { name: "Назад" })).toHaveAttribute(
-      "href",
-      "https://kupigolosdashboard.vercel.app",
-    );
     expect(screen.getByRole("heading", { level: 1, name: "5 страниц" })).toBeInTheDocument();
     expect(screen.getAllByRole("heading", { level: 2 }).map(({ textContent }) => textContent)).toEqual([
       "Дикторы",

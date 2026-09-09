@@ -12,36 +12,10 @@ body:has(.page-index) {
 }
 
 .page-index {
-  position: relative;
   width: min(1120px, calc(100% - 40px));
   min-height: 100dvh;
   margin: 0 auto;
   padding: clamp(40px, 8vw, 104px) 0;
-}
-
-.page-index__back {
-  position: absolute;
-  top: clamp(14px, 3vw, 40px);
-  left: 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: #687096;
-  font-size: .875rem;
-  font-weight: 750;
-  text-decoration: none;
-  transition: color .2s ease, transform .2s ease;
-}
-
-.page-index__back span {
-  font-size: 1rem;
-}
-
-.page-index__back:hover,
-.page-index__back:focus-visible {
-  color: #f54622;
-  outline: none;
-  transform: translateX(-3px);
 }
 
 .page-index__header h1 {
@@ -162,7 +136,6 @@ body:has(.page-index) {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .page-index__back,
   .page-card,
   .page-card__action b {
     transition: none;

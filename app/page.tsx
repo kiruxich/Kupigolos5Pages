@@ -32,10 +32,6 @@ const pages = [
 export default function PageIndex() {
   return (
     <main className="page-index">
-      <Link className="page-index__back" href="https://kupigolosdashboard.vercel.app">
-        <span aria-hidden="true">←</span>
-        Назад
-      </Link>
       <header className="page-index__header">
         <h1>5 страниц</h1>
         <p>Выберите страницу для просмотра.</p>
