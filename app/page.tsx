@@ -1,12 +1,5 @@
-import type { Viewport } from "next";
-
-export const viewport: Viewport = { themeColor: "#f54622" };
+import { redirect } from "next/navigation";
 
 export default function SixPagesPage() {
-  return (
-    <main className="six-pages-page">
-      <h1>6 страниц</h1>
-      <p>Пока здесь пусто.</p>
-    </main>
-  );
+  redirect("/diktory");
 }
