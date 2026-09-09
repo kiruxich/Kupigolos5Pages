@@ -1,31 +1,120 @@
 import Link from "next/link";
+import type { SeoDocumentKey } from "@/lib/seo-page-config";
+
+const pageLinks: ReadonlyArray<{
+  href: string;
+  label: string;
+  documentKey?: SeoDocumentKey;
+}> = [
+  { href: "/diktory", label: "Все дикторы", documentKey: "diktory" },
+  { href: "/diktory/dubbing", label: "Актёры дубляжа", documentKey: "dubbing" },
+  { href: "/diktory/izvestnye_golosa", label: "Известные дикторы", documentKey: "famous" },
+  { href: "/diktory/zhenskie_golosa", label: "Женские голоса", documentKey: "women" },
+  { href: "/perevod", label: "Локализация", documentKey: "localization" },
+  { href: "/", label: "← В дашборд" },
+];
 
 function Logo() {
   return (
-    <span className="inline-flex items-center gap-2.5 text-[17px] font-extrabold tracking-[-0.04em] text-[#273778]">
-      <svg className="h-8 w-8 text-[#f24b2b]" viewBox="0 0 44 44" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true">
+    <span className="inline-flex items-center gap-2.5 text-[17px] font-extrabold tracking-[-0.04em] text-white">
+      <svg
+        className="h-8 w-8 text-white"
+        viewBox="0 0 44 44"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.4"
+        aria-hidden="true"
+      >
         <path d="M4 22h4m4-7v14m5-20v26m6-20v14m6-9v4m6-9v14m5-7h4" />
       </svg>
-      <span>купи<span className="text-[#f24b2b]">голос</span></span>
+      <span>
+        купи<span className="text-white">голос</span>
+      </span>
     </span>
   );
 }
 
-export function SiteHeader() {
+function HeaderLink({
+  href,
+  label,
+  active,
+  mobile = false,
+}: {
+  href: string;
+  label: string;
+  active: boolean;
+  mobile?: boolean;
+}) {
   return (
-    <header className="fixed inset-x-0 top-3 z-50 px-3 sm:top-[18px] sm:px-5">
-      <div className="mx-auto flex min-h-[60px] max-w-[1320px] items-center gap-4 rounded-2xl border border-white/80 bg-white/90 px-4 shadow-[0_18px_48px_rgba(39,55,120,.14)] backdrop-blur-xl sm:min-h-[72px] sm:px-6">
-        <Link href="/" aria-label="КупиГолос, на главную"><Logo /></Link>
-        <nav className="ml-auto hidden items-center gap-7 text-sm font-semibold text-[#56618f] lg:flex" aria-label="Основная навигация">
-          <Link className="transition-colors hover:text-[#f24b2b]" href="/diktory">Дикторы</Link>
-          <Link className="transition-colors hover:text-[#f24b2b]" href="/perevod">Локализация</Link>
-          <a className="transition-colors hover:text-[#f24b2b]" href="https://kupigolos.ru/services">Услуги</a>
-          <a className="transition-colors hover:text-[#f24b2b]" href="https://kupigolos.ru/ai">ИИ-сервисы</a>
+    <Link
+      className={
+        mobile
+          ? `rounded-xl px-4 py-3 transition-colors ${active ? "bg-white text-[#a63c28]" : "text-white hover:bg-white/15"}`
+          : `whitespace-nowrap rounded-xl px-2.5 py-2.5 transition-colors ${active ? "bg-white/20 text-white" : "text-white/85 hover:bg-white/12 hover:text-white"}`
+      }
+      href={href}
+      aria-current={active ? "page" : undefined}
+    >
+      {label}
+    </Link>
+  );
+}
+
+export function SiteHeader({ documentKey }: { documentKey: SeoDocumentKey }) {
+  return (
+    <header className="fixed inset-x-0 top-2.5 z-50 px-3">
+      <div className="mx-auto flex min-h-[72px] max-w-[1540px] items-center gap-3 rounded-[17px] border border-white/15 bg-[#c1492e] px-4 text-white shadow-[0_8px_24px_rgba(72,35,30,.18)] sm:px-6 lg:px-8">
+        <Link href="/" aria-label="КупиГолос, в дашборд">
+          <Logo />
+        </Link>
+
+        <nav
+          className="ml-auto hidden items-center gap-1 text-[13px] font-semibold xl:flex 2xl:gap-2 2xl:text-sm"
+          aria-label="Основная навигация"
+        >
+          {pageLinks.map((link) => (
+            <HeaderLink
+              key={link.href}
+              href={link.href}
+              label={link.label}
+              active={link.documentKey === documentKey}
+            />
+          ))}
         </nav>
-        <a className="ml-auto hidden text-sm font-bold text-[#273778] sm:block lg:ml-4" href="tel:88002004551">8 800 200-45-51</a>
-        <a className="rounded-xl bg-[#f24b2b] px-4 py-2.5 text-sm font-bold text-white transition hover:bg-[#d94326]" href="#contacts">Обсудить проект</a>
+
+        <a className="hidden whitespace-nowrap text-sm font-bold text-white/90 2xl:block" href="tel:88002004551">
+          8 800 200-45-51
+        </a>
+        <a
+          className="hidden whitespace-nowrap rounded-xl bg-white px-4 py-2.5 text-sm font-bold text-[#a63c28] transition hover:bg-[#fff4f0] md:inline-flex"
+          href="#contacts"
+        >
+          Обсудить проект
+        </a>
+
+        <details className="group relative ml-auto xl:hidden">
+          <summary className="flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-xl bg-white/12 transition hover:bg-white/20 [&::-webkit-details-marker]:hidden">
+            <span className="sr-only">Открыть навигацию</span>
+            <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+              <path d="M4 7h16M4 12h16M4 17h16" />
+            </svg>
+          </summary>
+          <nav
+            className="absolute right-0 top-[calc(100%+12px)] grid w-[min(88vw,330px)] gap-1 rounded-2xl border border-white/15 bg-[#a63c28] p-2 text-sm font-semibold shadow-[0_18px_42px_rgba(72,35,30,.28)]"
+            aria-label="Мобильная навигация"
+          >
+            {pageLinks.map((link) => (
+              <HeaderLink
+                key={link.href}
+                href={link.href}
+                label={link.label}
+                active={link.documentKey === documentKey}
+                mobile
+              />
+            ))}
+          </nav>
+        </details>
       </div>
     </header>
   );
 }
-

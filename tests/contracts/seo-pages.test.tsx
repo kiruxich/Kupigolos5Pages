@@ -1,6 +1,7 @@
-import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 import { CatalogRuntime } from "@/components/seo/catalog-runtime";
+import { SiteHeader } from "@/components/seo/site-header";
 import { seoDocuments } from "@/lib/seo-documents";
 import { seoPageConfig } from "@/lib/seo-page-config";
 
@@ -46,6 +47,28 @@ describe("SEO page content contracts", () => {
     expect(main.querySelectorAll(".kg-filter-group").length).toBe(5);
     expect(main.textContent).toContain("Скрыть договорные цены");
     expect(main.textContent).toContain("Показать без демо");
+  });
+});
+
+describe("shared SEO header", () => {
+  it("uses the main page color and links all five pages plus the dashboard", () => {
+    const { container } = render(<SiteHeader documentKey="dubbing" />);
+    const navigation = within(screen.getByRole("navigation", { name: "Основная навигация" }));
+
+    expect(container.querySelector("header > div")).toHaveClass("bg-[#c1492e]");
+    expect(navigation.getAllByRole("link")).toHaveLength(6);
+    expect(navigation.getByRole("link", { name: "Все дикторы" })).toHaveAttribute("href", "/diktory");
+    expect(navigation.getByRole("link", { name: "Актёры дубляжа" })).toHaveAttribute("aria-current", "page");
+    expect(navigation.getByRole("link", { name: "Известные дикторы" })).toHaveAttribute(
+      "href",
+      "/diktory/izvestnye_golosa",
+    );
+    expect(navigation.getByRole("link", { name: "Женские голоса" })).toHaveAttribute(
+      "href",
+      "/diktory/zhenskie_golosa",
+    );
+    expect(navigation.getByRole("link", { name: "Локализация" })).toHaveAttribute("href", "/perevod");
+    expect(navigation.getByRole("link", { name: "← В дашборд" })).toHaveAttribute("href", "/");
   });
 });
 

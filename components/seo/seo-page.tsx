@@ -8,7 +8,7 @@ export function SeoPage({ documentKey }: { documentKey: SeoDocumentKey }) {
   const document = seoDocuments[documentKey];
   return (
     <>
-      <SiteHeader />
+      <SiteHeader documentKey={documentKey} />
       <main>
         {document.jsonLd.map((value, index) => (
           <script key={index} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(value) }} />
