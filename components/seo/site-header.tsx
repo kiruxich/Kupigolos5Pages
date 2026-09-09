@@ -69,7 +69,7 @@ export function SiteHeader({ documentKey }: { documentKey: SeoDocumentKey }) {
         </Link>
 
         <nav
-          className="ml-auto hidden items-center gap-1 text-[13px] font-semibold xl:flex 2xl:gap-2 2xl:text-sm"
+          className="ml-auto hidden items-center gap-1 text-[13px] font-semibold min-[1400px]:flex 2xl:gap-2 2xl:text-sm"
           aria-label="Основная навигация"
         >
           {pageLinks.map((link) => (
@@ -82,17 +82,7 @@ export function SiteHeader({ documentKey }: { documentKey: SeoDocumentKey }) {
           ))}
         </nav>
 
-        <a className="hidden whitespace-nowrap text-sm font-bold text-white/90 2xl:block" href="tel:88002004551">
-          8 800 200-45-51
-        </a>
-        <a
-          className="hidden whitespace-nowrap rounded-xl bg-white px-4 py-2.5 text-sm font-bold text-[#a63c28] transition hover:bg-[#fff4f0] md:inline-flex"
-          href="#contacts"
-        >
-          Обсудить проект
-        </a>
-
-        <details className="group relative ml-auto xl:hidden">
+        <details className="group relative ml-auto min-[1400px]:hidden">
           <summary className="flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-xl bg-white/12 transition hover:bg-white/20 [&::-webkit-details-marker]:hidden">
             <span className="sr-only">Открыть навигацию</span>
             <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">

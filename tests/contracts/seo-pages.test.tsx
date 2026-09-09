@@ -69,6 +69,8 @@ describe("shared SEO header", () => {
     );
     expect(navigation.getByRole("link", { name: "Локализация" })).toHaveAttribute("href", "/perevod");
     expect(navigation.getByRole("link", { name: "← В дашборд" })).toHaveAttribute("href", "/");
+    expect(screen.queryByRole("link", { name: "Обсудить проект" })).not.toBeInTheDocument();
+    expect(container.querySelector('a[href^="tel:"]')).not.toBeInTheDocument();
   });
 });
 
