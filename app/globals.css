@@ -1,0 +1,35 @@
+html {
+  color-scheme: light;
+  font-family: Manrope, Arial, sans-serif;
+  line-height: normal;
+  background: #f4f5f8;
+}
+
+body {
+  min-height: 100dvh;
+  margin: 0;
+  color: #273778;
+  background: #f4f5f8;
+  font: 400 16px/normal Manrope, Arial, sans-serif;
+}
+
+.six-pages-page {
+  width: min(1200px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: clamp(40px, 8vw, 112px) 0;
+}
+
+.six-pages-page h1 {
+  margin: 0 0 14px;
+  font-family: Manrope, Arial, sans-serif;
+  font-size: clamp(2.8rem, 7vw, 6.5rem);
+  font-weight: 700;
+  letter-spacing: -.065em;
+  line-height: .95;
+}
+
+.six-pages-page p {
+  margin: 0;
+  color: #687096;
+  line-height: 1.6;
+}
