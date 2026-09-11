@@ -41,6 +41,25 @@ const clientLogos: Record<string, string> = {
   "fix price": "https://kupigolos.ru/img/clients/fix-price.png",
 };
 
+const famousPortraits = new Map([
+  [
+    "https://img.kupigolos.ru/voice/5ab7eec080324.jpg?p=v&amp;s=c57bca7a82ee501a56531885a74025a9",
+    "https://img.kupigolos.ru/voice/5ab7eec080324.jpg?p=bv&amp;s=18bde4da83a9799e8daef792b48b6231",
+  ],
+  [
+    "https://img.kupigolos.ru/voice/5ab8f51c5a644.jpg?p=v&amp;s=dc2dec602a793299380b01373ae079b3",
+    "https://img.kupigolos.ru/voice/5ab8f51c5a644.jpg?p=bv&amp;s=cc770882db3d1a80a3c291bcd9b5582e",
+  ],
+  [
+    "https://img.kupigolos.ru/voice/5aba34090931d.jpg?p=v&amp;s=63d4d22e2593d73e7612e0fb186b5a36",
+    "https://img.kupigolos.ru/voice/5aba34090931d.jpg?p=bv&amp;s=b678a96f559b0bc6eddf6089f508f1b3",
+  ],
+]);
+
+function useLargeFamousPortraits(html: string) {
+  return [...famousPortraits].reduce((result, [thumbnail, portrait]) => result.replaceAll(thumbnail, portrait), html);
+}
+
 function normalized(value: string | null | undefined) {
   return (value ?? "").trim().toLocaleLowerCase("ru-RU");
 }
@@ -53,6 +72,7 @@ function priceFrom(card: Element) {
 
 export function CatalogRuntime({ html, documentKey }: { html: string; documentKey: string }) {
   const rootRef = useRef<HTMLDivElement>(null);
+  const renderedHtml = documentKey === "famous" ? useLargeFamousPortraits(html) : html;
 
   useEffect(() => {
     const root = rootRef.current;
@@ -284,5 +304,5 @@ export function CatalogRuntime({ html, documentKey }: { html: string; documentKe
     return () => listeners.forEach((remove) => remove());
   }, [documentKey, html]);
 
-  return <div id="start" ref={rootRef} className={`seo-document seo-document--${documentKey}`} dangerouslySetInnerHTML={{ __html: html }} />;
+  return <div id="start" ref={rootRef} className={`seo-document seo-document--${documentKey}`} dangerouslySetInnerHTML={{ __html: renderedHtml }} />;
 }

@@ -61,6 +61,17 @@ describe("SEO page content contracts", () => {
     expect(container.querySelectorAll(".kg-faq-list details")).toHaveLength(6);
     expect(screen.getByText("Чем локализация контента отличается от перевода?")).toBeInTheDocument();
   });
+
+  it("uses full-size portraits for the famous voices page", () => {
+    const { container } = render(<CatalogRuntime html={seoDocuments.famous.html} documentKey="famous" />);
+    const portraits = [...container.querySelectorAll<HTMLImageElement>("#who .kg-photo-strip img")];
+
+    expect(portraits).toHaveLength(3);
+    portraits.forEach((portrait) => {
+      expect(portrait.src).toContain("p=bv");
+      expect(portrait.src).not.toContain("p=v&");
+    });
+  });
 });
 
 describe("shared SEO header", () => {

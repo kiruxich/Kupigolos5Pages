@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SeoPage } from "@/components/seo/seo-page";
 import { seoPageConfig } from "@/lib/seo-page-config";
+import "@/app/famous-portraits.css";
 
 const config = seoPageConfig.famous;
 export const metadata: Metadata = { title: config.title, description: config.description, alternates: { canonical: config.canonical } };
@@ -8,4 +9,3 @@ export const metadata: Metadata = { title: config.title, description: config.des
 export default function FamousVoicesPage() {
   return <SeoPage documentKey={config.document} />;
 }
-
