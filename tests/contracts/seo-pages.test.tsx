@@ -49,6 +49,27 @@ describe("SEO page content contracts", () => {
     });
   });
 
+  it("renders the centered Figma breadcrumb trail for every SEO page", () => {
+    const trails = {
+      diktory: ["Главная", "База дикторов"],
+      dubbing: ["Главная", "База дикторов", "Актёры дубляжа и озвучки"],
+      famous: ["Главная", "База дикторов", "Известные дикторы"],
+      women: ["Главная", "База дикторов", "Женские голоса"],
+      localization: ["Главная", "Услуги", "Локализация и перевод"],
+    } as const;
+
+    Object.entries(trails).forEach(([documentKey, labels]) => {
+      const document = seoDocuments[documentKey as keyof typeof seoDocuments];
+      const { container, unmount } = render(<CatalogRuntime html={document.html} documentKey={documentKey} />);
+      const breadcrumbs = container.querySelector(".seo-document > .kg-breadcrumbs")!;
+
+      expect([...breadcrumbs.querySelectorAll("a, .kg-breadcrumb-current")].map((item) => item.textContent)).toEqual(labels);
+      expect(breadcrumbs.querySelectorAll(".kg-breadcrumb-arrow")).toHaveLength(labels.length - 1);
+      expect(breadcrumbs.querySelector("[aria-current='page']")).toHaveTextContent(labels.at(-1)!);
+      unmount();
+    });
+  });
+
   it("keeps all catalog controls on the main voice page", () => {
     const dom = new DOMParser().parseFromString(`<main>${seoDocuments.diktory.html}</main>`, "text/html");
     const main = dom.querySelector("main")!;

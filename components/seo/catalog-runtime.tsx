@@ -56,6 +56,53 @@ const famousPortraits = new Map([
   ],
 ]);
 
+const breadcrumbTrails: Record<string, ReadonlyArray<{ label: string; href?: string }>> = {
+  diktory: [
+    { label: "Главная", href: "/" },
+    { label: "База дикторов" },
+  ],
+  dubbing: [
+    { label: "Главная", href: "/" },
+    { label: "База дикторов", href: "/diktory" },
+    { label: "Актёры дубляжа и озвучки" },
+  ],
+  famous: [
+    { label: "Главная", href: "/" },
+    { label: "База дикторов", href: "/diktory" },
+    { label: "Известные дикторы" },
+  ],
+  women: [
+    { label: "Главная", href: "/" },
+    { label: "База дикторов", href: "/diktory" },
+    { label: "Женские голоса" },
+  ],
+  localization: [
+    { label: "Главная", href: "/" },
+    { label: "Услуги", href: "https://kupigolos.ru/" },
+    { label: "Локализация и перевод" },
+  ],
+};
+
+function withFigmaBreadcrumbs(html: string, documentKey: string) {
+  const trail = breadcrumbTrails[documentKey] ?? breadcrumbTrails.diktory!;
+  const withoutWrappedBreadcrumb = html.replace(
+    /<div class="kg-wrap">\s*<(?:nav|div)[^>]*class="kg-breadcrumbs"[^>]*>[\s\S]*?<\/(?:nav|div)>\s*<\/div>/,
+    "",
+  );
+  const withoutBreadcrumb = withoutWrappedBreadcrumb.replace(
+    /<(?:nav|div)[^>]*class="kg-breadcrumbs"[^>]*>[\s\S]*?<\/(?:nav|div)>/,
+    "",
+  );
+  const items = trail.map((item, index) => {
+    const crumb = item.href
+      ? `<a href="${item.href}">${item.label}</a>`
+      : `<span class="kg-breadcrumb-current" aria-current="page">${item.label}</span>`;
+    return index === 0 ? crumb : `<span class="kg-breadcrumb-arrow" aria-hidden="true">→</span>${crumb}`;
+  }).join("");
+
+  return `<nav class="kg-breadcrumbs kg-wrap" aria-label="Хлебные крошки">${items}</nav>${withoutBreadcrumb}`;
+}
+
 function useLargeFamousPortraits(html: string) {
   return [...famousPortraits].reduce((result, [thumbnail, portrait]) => result.replaceAll(thumbnail, portrait), html);
 }
@@ -77,7 +124,8 @@ function priceFrom(card: Element) {
 export function CatalogRuntime({ html, documentKey }: { html: string; documentKey: string }) {
   const rootRef = useRef<HTMLDivElement>(null);
   const contentWithoutHeroActions = removeHeroActions(html);
-  const renderedHtml = documentKey === "famous" ? useLargeFamousPortraits(contentWithoutHeroActions) : contentWithoutHeroActions;
+  const contentWithBreadcrumbs = withFigmaBreadcrumbs(contentWithoutHeroActions, documentKey);
+  const renderedHtml = documentKey === "famous" ? useLargeFamousPortraits(contentWithBreadcrumbs) : contentWithBreadcrumbs;
 
   useEffect(() => {
     const root = rootRef.current;

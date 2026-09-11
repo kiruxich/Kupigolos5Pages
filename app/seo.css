@@ -1582,3 +1582,40 @@
   .seo-document :is(.kg-desc,.kg-speciality) { font-size: 13px; }
   .seo-document .kg-section p { font-size: 15px; }
 }
+
+/* Centered Figma breadcrumb row shared by all five landing pages. */
+@layer components {
+  .seo-document > .kg-breadcrumbs {
+    display: flex;
+    width: min(1276px, calc(100% - 48px));
+    min-height: 174px;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-inline: auto;
+    padding: 38px 0 42px;
+    color: #3b4173;
+    font-size: clamp(22px, 2.15vw, 30px);
+    font-weight: 400;
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  .seo-document > .kg-breadcrumbs a { color: #3b4173; text-decoration: none; }
+  .seo-document > .kg-breadcrumbs a:is(:hover, :focus-visible) { color: #c1492e; }
+  .seo-document > .kg-breadcrumbs .kg-breadcrumb-arrow { color: #3b4173; opacity: 1; }
+  .seo-document > .kg-breadcrumbs .kg-breadcrumb-current { color: #b7b7b7; opacity: 1; }
+}
+
+@media (max-width: 680px) {
+  @layer components {
+    .seo-document > .kg-breadcrumbs {
+      width: min(100% - 28px, 1276px);
+      min-height: 108px;
+      flex-wrap: wrap;
+      gap: 7px 10px;
+      padding: 24px 0 28px;
+      font-size: clamp(16px, 5vw, 20px);
+    }
+  }
+}
