@@ -59,6 +59,32 @@ export function CatalogRuntime({ html, documentKey }: { html: string; documentKe
     if (!root) return;
     const listeners: Array<() => void> = [];
 
+    root.querySelectorAll<HTMLElement>(".kg-faq").forEach((section) => {
+      const layout = section.querySelector<HTMLElement>(":scope > .kg-wrap") ?? section;
+      const title = layout.querySelector<HTMLElement>(":scope > h2");
+      const kicker = layout.querySelector<HTMLElement>(":scope > .kg-kicker");
+      const details = [...layout.querySelectorAll<HTMLDetailsElement>(":scope > details")];
+      if (!title || !details.length) return;
+
+      const originalChildren = [...layout.children];
+      const heading = document.createElement("header");
+      heading.className = "kg-faq-heading";
+      const list = document.createElement("div");
+      list.className = "kg-faq-list";
+      if (kicker) heading.append(kicker);
+      heading.append(title);
+      details.forEach((item) => list.append(item));
+      layout.append(heading, list);
+      section.classList.add("kg-faq-stage");
+      layout.classList.add("kg-faq-layout");
+
+      listeners.push(() => {
+        layout.replaceChildren(...originalChildren);
+        layout.classList.remove("kg-faq-layout");
+        section.classList.remove("kg-faq-stage");
+      });
+    });
+
     root.querySelectorAll<HTMLElement>(".kg-review-grid").forEach((grid) => {
       const section = grid.closest<HTMLElement>(".kg-source-block") ?? grid.closest<HTMLElement>(".kg-section");
       const container = grid.parentElement;

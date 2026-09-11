@@ -214,13 +214,13 @@
       "degree": 4
     },
     {
-      "id": "lib_seo_documents_seodocuments",
-      "label": "seoDocuments",
+      "id": "tsconfig_compileroptions_lib",
+      "label": "lib",
       "degree": 4
     },
     {
-      "id": "tsconfig_compileroptions_lib",
-      "label": "lib",
+      "id": "lib_seo_documents_seodocuments",
+      "label": "seoDocuments",
       "degree": 4
     }
   ],

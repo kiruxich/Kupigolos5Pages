@@ -57,6 +57,9 @@ describe("SEO page content contracts", () => {
     expect(screen.getByRole("link", { name: "Оставить отзыв" })).toHaveAttribute("href", "https://yandex.ru/maps/org/studiya_kupigolos/118434769430/reviews/");
     expect(container.querySelectorAll(".kg-client-film-group")).toHaveLength(2);
     expect(container.querySelector('[data-client-name="Л’Этуаль"]')).toHaveTextContent("Л’Этуаль");
+    expect(container.querySelector(".kg-faq-layout .kg-faq-heading")).toHaveTextContent("Часто задаваемые вопросы");
+    expect(container.querySelectorAll(".kg-faq-list details")).toHaveLength(6);
+    expect(screen.getByText("Чем локализация контента отличается от перевода?")).toBeInTheDocument();
   });
 });
 

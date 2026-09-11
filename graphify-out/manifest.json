@@ -66,10 +66,10 @@
     "semantic_hash": "f8826ed4ec37dcbbeba258faf4e7279f"
   },
   "components/seo/catalog-runtime.tsx": {
-    "mtime": 1789125857.7099524,
-    "seen": 1789125955.6887748,
-    "ast_hash": "1ee29af43a03c483f0bd4d239347e8fe",
-    "semantic_hash": "1ee29af43a03c483f0bd4d239347e8fe"
+    "mtime": 1789126325.2535334,
+    "seen": 1789126511.27693,
+    "ast_hash": "5e0150def05c5409828642d194efac41",
+    "semantic_hash": "5e0150def05c5409828642d194efac41"
   },
   "components/seo/seo-page.tsx": {
     "mtime": 1788953930.2193902,
@@ -108,10 +108,10 @@
     "semantic_hash": "239f3ebf717465dc636818a1a619398d"
   },
   "tests/contracts/seo-pages.test.tsx": {
-    "mtime": 1789125916.7963665,
-    "seen": 1789125955.688898,
-    "ast_hash": "1ed34184af2aa3be27c9a2b478688b85",
-    "semantic_hash": "1ed34184af2aa3be27c9a2b478688b85"
+    "mtime": 1789126396.4236176,
+    "seen": 1789126511.277057,
+    "ast_hash": "c94c4e91686682259bfa02a478402b41",
+    "semantic_hash": "c94c4e91686682259bfa02a478402b41"
   },
   "vitest.config.ts": {
     "mtime": 1788948968.0,

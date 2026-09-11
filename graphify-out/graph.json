@@ -1312,7 +1312,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/seo/catalog-runtime.tsx",
-      "source_location": "L107",
+      "source_location": "L133",
       "weight": 1.0
     },
     {
@@ -1324,7 +1324,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/seo/catalog-runtime.tsx",
-      "source_location": "L158",
+      "source_location": "L184",
       "weight": 1.0
     },
     {
@@ -3107,5 +3107,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "0a781907ed12666a7cc3a5416e3b27fa90cce18c"
+  "built_at_commit": "88ee17da10033e62633e15b160f191c57b9c4f51"
 }
