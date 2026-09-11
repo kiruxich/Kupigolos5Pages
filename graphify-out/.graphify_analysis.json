@@ -245,13 +245,13 @@
       "degree": 4
     },
     {
-      "id": "lib_seo_documents_seodocuments",
-      "label": "seoDocuments",
+      "id": "scripts_sync_preprod_voices_readcatalog",
+      "label": "readCatalog()",
       "degree": 4
     },
     {
-      "id": "tsconfig_compileroptions_lib",
-      "label": "lib",
+      "id": "scripts_sync_preprod_voices_readspeakers",
+      "label": "readSpeakers()",
       "degree": 4
     }
   ],

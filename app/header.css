@@ -4,7 +4,7 @@
   --header-blue: #3b4173;
 }
 
-.header-root { position: relative; z-index: 200; }
+.header-root { position: relative; z-index: 200; height: 100px; }
 .site-header { position: fixed; z-index: 200; top: 10px; right: 0; left: 0; height: 70px; color: #fff; }
 .site-header-inner { position: relative; display: flex; width: min(1268px,calc(100% - 24px)); max-width: 1268px; height: 70px; align-items: center; justify-content: space-between; margin-inline: auto; padding: 0 25px; border-radius: 25px; background: var(--header-rust); }
 .site-header .brand { position: relative; z-index: 2; display: block; width: 90px; height: 40px; flex: 0 0 90px; }
