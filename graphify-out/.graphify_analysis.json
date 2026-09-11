@@ -119,13 +119,13 @@
     ],
     "6": [
       "components_seo_site_header",
-      "components_seo_site_header_headergroup",
-      "components_seo_site_header_headerlink",
-      "components_seo_site_header_headerpanel",
-      "components_seo_site_header_panelname",
-      "components_seo_site_header_panels",
+      "components_seo_site_header_accounticon",
+      "components_seo_site_header_hearticon",
+      "components_seo_site_header_primarylinks",
       "components_seo_site_header_siteheader",
-      "components_seo_site_header_url"
+      "components_seo_site_header_telegramicon",
+      "components_seo_site_header_utilitylinks",
+      "components_seo_site_header_whatsappicon"
     ],
     "7": [
       "app_page",
@@ -166,7 +166,7 @@
     "3": 0.1111111111111111,
     "4": 0.28888888888888886,
     "5": 0.2222222222222222,
-    "6": 0.32142857142857145,
+    "6": 0.25,
     "7": 0.4666666666666667,
     "8": 0.6666666666666666,
     "9": 1.0,
@@ -182,13 +182,13 @@
       "degree": 17
     },
     {
-      "id": "lib_seo_page_config_seopageconfig",
-      "label": "seoPageConfig",
+      "id": "components_seo_catalog_runtime_catalogruntime",
+      "label": "CatalogRuntime()",
       "degree": 7
     },
     {
-      "id": "components_seo_catalog_runtime_catalogruntime",
-      "label": "CatalogRuntime()",
+      "id": "lib_seo_page_config_seopageconfig",
+      "label": "seoPageConfig",
       "degree": 7
     },
     {
@@ -212,11 +212,6 @@
       "degree": 4
     },
     {
-      "id": "components_seo_site_header_siteheader",
-      "label": "SiteHeader()",
-      "degree": 4
-    },
-    {
       "id": "lib_seo_documents_seodocuments",
       "label": "seoDocuments",
       "degree": 4
@@ -225,6 +220,11 @@
       "id": "tsconfig_compileroptions_lib",
       "label": "lib",
       "degree": 4
+    },
+    {
+      "id": "components_seo_site_header_siteheader",
+      "label": "SiteHeader()",
+      "degree": 3
     }
   ],
   "surprises": [],

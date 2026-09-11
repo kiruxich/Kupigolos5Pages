@@ -28,42 +28,6 @@
       "source_location": "L5"
     },
     {
-      "id": "components_seo_site_header_headergroup",
-      "label": "HeaderGroup",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 6,
-      "file_type": "code",
-      "norm_label": "headergroup",
-      "source_file": "components/seo/site-header.tsx",
-      "source_location": "L10"
-    },
-    {
-      "id": "components_seo_site_header_headerlink",
-      "label": "HeaderLink",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 6,
-      "file_type": "code",
-      "norm_label": "headerlink",
-      "source_file": "components/seo/site-header.tsx",
-      "source_location": "L9"
-    },
-    {
-      "id": "components_seo_site_header_panelname",
-      "label": "PanelName",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 6,
-      "file_type": "code",
-      "norm_label": "panelname",
-      "source_file": "components/seo/site-header.tsx",
-      "source_location": "L8"
-    },
-    {
       "id": "lib_seo_page_config_seodocumentkey",
       "label": "SeoDocumentKey",
       "_callable": true,
@@ -219,15 +183,26 @@
       "source_location": "L59"
     },
     {
-      "id": "components_seo_site_header_headerpanel",
-      "label": "HeaderPanel()",
+      "id": "components_seo_site_header_accounticon",
+      "label": "AccountIcon()",
       "_callable": true,
       "_origin": "ast",
       "community": 6,
       "file_type": "code",
-      "norm_label": "headerpanel()",
+      "norm_label": "accounticon()",
       "source_file": "components/seo/site-header.tsx",
-      "source_location": "L54"
+      "source_location": "L37"
+    },
+    {
+      "id": "components_seo_site_header_hearticon",
+      "label": "HeartIcon()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "file_type": "code",
+      "norm_label": "hearticon()",
+      "source_file": "components/seo/site-header.tsx",
+      "source_location": "L33"
     },
     {
       "id": "components_seo_site_header_siteheader",
@@ -238,18 +213,29 @@
       "file_type": "code",
       "norm_label": "siteheader()",
       "source_file": "components/seo/site-header.tsx",
-      "source_location": "L76"
+      "source_location": "L41"
     },
     {
-      "id": "components_seo_site_header_url",
-      "label": "url()",
+      "id": "components_seo_site_header_telegramicon",
+      "label": "TelegramIcon()",
       "_callable": true,
       "_origin": "ast",
       "community": 6,
       "file_type": "code",
-      "norm_label": "url()",
+      "norm_label": "telegramicon()",
       "source_file": "components/seo/site-header.tsx",
-      "source_location": "L52"
+      "source_location": "L25"
+    },
+    {
+      "id": "components_seo_site_header_whatsappicon",
+      "label": "WhatsAppIcon()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "file_type": "code",
+      "norm_label": "whatsappicon()",
+      "source_file": "components/seo/site-header.tsx",
+      "source_location": "L29"
     },
     {
       "id": "app_page_pageindex",
@@ -1244,14 +1230,24 @@
       "source_location": "L1"
     },
     {
-      "id": "components_seo_site_header_panels",
-      "label": "panels",
+      "id": "components_seo_site_header_primarylinks",
+      "label": "primaryLinks",
       "_origin": "ast",
       "community": 6,
       "file_type": "code",
-      "norm_label": "panels",
+      "norm_label": "primarylinks",
       "source_file": "components/seo/site-header.tsx",
-      "source_location": "L12"
+      "source_location": "L17"
+    },
+    {
+      "id": "components_seo_site_header_utilitylinks",
+      "label": "utilityLinks",
+      "_origin": "ast",
+      "community": 6,
+      "file_type": "code",
+      "norm_label": "utilitylinks",
+      "source_file": "components/seo/site-header.tsx",
+      "source_location": "L9"
     },
     {
       "id": "app_page",
@@ -1381,30 +1377,6 @@
       "context": "call",
       "source_file": "components/seo/catalog-runtime.tsx",
       "source_location": "L80",
-      "weight": 1.0
-    },
-    {
-      "source": "components_seo_site_header_headerpanel",
-      "target": "components_seo_site_header_url",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "components/seo/site-header.tsx",
-      "source_location": "L63",
-      "weight": 1.0
-    },
-    {
-      "source": "components_seo_site_header_siteheader",
-      "target": "components_seo_site_header_url",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "components/seo/site-header.tsx",
-      "source_location": "L109",
       "weight": 1.0
     },
     {
@@ -2536,46 +2508,57 @@
     },
     {
       "source": "components_seo_site_header",
-      "target": "components_seo_site_header_headergroup",
+      "target": "components_seo_site_header_primarylinks",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/seo/site-header.tsx",
-      "source_location": "L10",
+      "source_location": "L17",
       "weight": 1.0
     },
     {
       "source": "components_seo_site_header",
-      "target": "components_seo_site_header_panels",
+      "target": "components_seo_site_header_telegramicon",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/seo/site-header.tsx",
-      "source_location": "L12",
+      "source_location": "L25",
       "weight": 1.0
     },
     {
       "source": "components_seo_site_header",
-      "target": "components_seo_site_header_url",
+      "target": "components_seo_site_header_whatsappicon",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/seo/site-header.tsx",
-      "source_location": "L52",
+      "source_location": "L29",
       "weight": 1.0
     },
     {
       "source": "components_seo_site_header",
-      "target": "components_seo_site_header_headerpanel",
+      "target": "components_seo_site_header_hearticon",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/seo/site-header.tsx",
-      "source_location": "L54",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "components_seo_site_header",
+      "target": "components_seo_site_header_accounticon",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/seo/site-header.tsx",
+      "source_location": "L37",
       "weight": 1.0
     },
     {
@@ -2586,23 +2569,12 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/seo/site-header.tsx",
-      "source_location": "L76",
+      "source_location": "L41",
       "weight": 1.0
     },
     {
       "source": "components_seo_site_header",
-      "target": "components_seo_site_header_panelname",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/seo/site-header.tsx",
-      "source_location": "L8",
-      "weight": 1.0
-    },
-    {
-      "source": "components_seo_site_header",
-      "target": "components_seo_site_header_headerlink",
+      "target": "components_seo_site_header_utilitylinks",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -3196,5 +3168,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "4580b71e47482d8b2a56fa76ec39c088c1b742ec"
+  "built_at_commit": "ee9a39e0a46cb2fc9aef90e57e0db56fad6777e5"
 }
