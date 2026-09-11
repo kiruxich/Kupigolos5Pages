@@ -40,6 +40,15 @@ describe("SEO page content contracts", () => {
     });
   });
 
+  it("removes the hero action buttons from every SEO page", () => {
+    Object.entries(seoDocuments).forEach(([documentKey, document]) => {
+      const { container, unmount } = render(<CatalogRuntime html={document.html} documentKey={documentKey} />);
+
+      expect(container.querySelector(".kg-hero .kg-actions")).not.toBeInTheDocument();
+      unmount();
+    });
+  });
+
   it("keeps all catalog controls on the main voice page", () => {
     const dom = new DOMParser().parseFromString(`<main>${seoDocuments.diktory.html}</main>`, "text/html");
     const main = dom.querySelector("main")!;

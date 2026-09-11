@@ -172,7 +172,7 @@
       "file_type": "code",
       "norm_label": "catalogruntime()",
       "source_file": "components/seo/catalog-runtime.tsx",
-      "source_location": "L73"
+      "source_location": "L77"
     },
     {
       "id": "components_seo_catalog_runtime_normalized",
@@ -183,7 +183,7 @@
       "file_type": "code",
       "norm_label": "normalized()",
       "source_file": "components/seo/catalog-runtime.tsx",
-      "source_location": "L63"
+      "source_location": "L67"
     },
     {
       "id": "components_seo_catalog_runtime_pricefrom",
@@ -194,7 +194,18 @@
       "file_type": "code",
       "norm_label": "pricefrom()",
       "source_file": "components/seo/catalog-runtime.tsx",
-      "source_location": "L67"
+      "source_location": "L71"
+    },
+    {
+      "id": "components_seo_catalog_runtime_removeheroactions",
+      "label": "removeHeroActions()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "norm_label": "removeheroactions()",
+      "source_file": "components/seo/catalog-runtime.tsx",
+      "source_location": "L63"
     },
     {
       "id": "components_seo_catalog_runtime_uselargefamousportraits",
@@ -1333,7 +1344,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/seo/catalog-runtime.tsx",
-      "source_location": "L153",
+      "source_location": "L158",
       "weight": 1.0
     },
     {
@@ -1345,7 +1356,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/seo/catalog-runtime.tsx",
-      "source_location": "L204",
+      "source_location": "L209",
+      "weight": 1.0
+    },
+    {
+      "source": "components_seo_catalog_runtime_catalogruntime",
+      "target": "components_seo_catalog_runtime_removeheroactions",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "components/seo/catalog-runtime.tsx",
+      "source_location": "L79",
       "weight": 1.0
     },
     {
@@ -1357,7 +1380,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/seo/catalog-runtime.tsx",
-      "source_location": "L75",
+      "source_location": "L80",
       "weight": 1.0
     },
     {
@@ -2436,7 +2459,7 @@
     },
     {
       "source": "components_seo_catalog_runtime",
-      "target": "components_seo_catalog_runtime_normalized",
+      "target": "components_seo_catalog_runtime_removeheroactions",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -2447,7 +2470,7 @@
     },
     {
       "source": "components_seo_catalog_runtime",
-      "target": "components_seo_catalog_runtime_pricefrom",
+      "target": "components_seo_catalog_runtime_normalized",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -2458,13 +2481,24 @@
     },
     {
       "source": "components_seo_catalog_runtime",
+      "target": "components_seo_catalog_runtime_pricefrom",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/seo/catalog-runtime.tsx",
+      "source_location": "L71",
+      "weight": 1.0
+    },
+    {
+      "source": "components_seo_catalog_runtime",
       "target": "components_seo_catalog_runtime_catalogruntime",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/seo/catalog-runtime.tsx",
-      "source_location": "L73",
+      "source_location": "L77",
       "weight": 1.0
     },
     {
@@ -3162,5 +3196,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "78af29c3e7e5a45e5f6f608d365a6a10e3f2ee2e"
+  "built_at_commit": "4580b71e47482d8b2a56fa76ec39c088c1b742ec"
 }

@@ -60,6 +60,10 @@ function useLargeFamousPortraits(html: string) {
   return [...famousPortraits].reduce((result, [thumbnail, portrait]) => result.replaceAll(thumbnail, portrait), html);
 }
 
+function removeHeroActions(html: string) {
+  return html.replace(/(<section class="kg-hero">[\s\S]*?)<div class="kg-actions">[\s\S]*?<\/div>/, "$1");
+}
+
 function normalized(value: string | null | undefined) {
   return (value ?? "").trim().toLocaleLowerCase("ru-RU");
 }
@@ -72,7 +76,8 @@ function priceFrom(card: Element) {
 
 export function CatalogRuntime({ html, documentKey }: { html: string; documentKey: string }) {
   const rootRef = useRef<HTMLDivElement>(null);
-  const renderedHtml = documentKey === "famous" ? useLargeFamousPortraits(html) : html;
+  const contentWithoutHeroActions = removeHeroActions(html);
+  const renderedHtml = documentKey === "famous" ? useLargeFamousPortraits(contentWithoutHeroActions) : contentWithoutHeroActions;
 
   useEffect(() => {
     const root = rootRef.current;
