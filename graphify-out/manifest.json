@@ -66,10 +66,10 @@
     "semantic_hash": "f8826ed4ec37dcbbeba258faf4e7279f"
   },
   "components/seo/catalog-runtime.tsx": {
-    "mtime": 1788948905.0,
-    "seen": 1788952079.56709,
-    "ast_hash": "46c591c88b54ccbd34c997827d549603",
-    "semantic_hash": "46c591c88b54ccbd34c997827d549603"
+    "mtime": 1789123904.1186366,
+    "seen": 1789124455.229845,
+    "ast_hash": "fbdbb8cd74622d22c58c2743035718f2",
+    "semantic_hash": "fbdbb8cd74622d22c58c2743035718f2"
   },
   "components/seo/seo-page.tsx": {
     "mtime": 1788953930.2193902,

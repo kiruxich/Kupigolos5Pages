@@ -115,12 +115,27 @@ export function CatalogRuntime({ html, documentKey }: { html: string; documentKe
       const parent = cards[0]?.parentElement;
       sorted.forEach((card) => parent?.append(card));
       cards.forEach((card) => { card.hidden = true; });
-      sorted.slice(0, expanded ? undefined : 4).forEach((card) => { card.hidden = false; });
+      sorted.slice(0, expanded ? undefined : 15).forEach((card) => { card.hidden = false; });
       live.textContent = `Найдено: ${matched.length}`;
       root.querySelectorAll<HTMLElement>(".kg-more").forEach((more) => {
-        more.hidden = matched.length <= 4 || expanded;
+        more.hidden = matched.length <= 15 || expanded;
       });
     };
+
+    const sidebar = root.querySelector<HTMLElement>(".kg-sidebar");
+    if (sidebar) {
+      const toggle = document.createElement("button");
+      toggle.type = "button";
+      toggle.className = "kg-filter-toggle";
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.innerHTML = '<span aria-hidden="true">☷</span><span>Фильтры</span>';
+      sidebar.before(toggle);
+      on(toggle, "click", () => {
+        const open = sidebar.classList.toggle("is-mobile-open");
+        toggle.setAttribute("aria-expanded", String(open));
+      });
+      listeners.push(() => toggle.remove());
+    }
 
     root.querySelectorAll<HTMLElement>("input, select").forEach((element) => on(element, "change", apply));
     if (search) on(search, "input", apply);
@@ -148,5 +163,5 @@ export function CatalogRuntime({ html, documentKey }: { html: string; documentKe
     return () => listeners.forEach((remove) => remove());
   }, [documentKey, html]);
 
-  return <div id="start" ref={rootRef} className="seo-document" dangerouslySetInnerHTML={{ __html: html }} />;
+  return <div id="start" ref={rootRef} className={`seo-document seo-document--${documentKey}`} dangerouslySetInnerHTML={{ __html: html }} />;
 }
