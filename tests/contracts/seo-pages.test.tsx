@@ -51,31 +51,20 @@ describe("SEO page content contracts", () => {
 });
 
 describe("shared SEO header", () => {
-  it("uses the main page color and links all five pages plus the dashboard", () => {
+  it("matches the local main page navigation and actions", () => {
     const { container } = render(<SiteHeader documentKey="dubbing" />);
     const navigation = within(screen.getByRole("navigation", { name: "Основная навигация" }));
 
-    expect(container.querySelector("header > div")).toHaveClass("bg-[#c1492e]");
-    expect(navigation.getAllByRole("link")).toHaveLength(6);
-    expect(navigation.getByRole("link", { name: "Все дикторы" })).toHaveAttribute("href", "/diktory");
-    expect(navigation.getByRole("link", { name: "Актёры дубляжа" })).toHaveAttribute("aria-current", "page");
-    expect(navigation.getByRole("link", { name: "Известные дикторы" })).toHaveAttribute(
-      "href",
-      "/diktory/izvestnye_golosa",
-    );
-    expect(navigation.getByRole("link", { name: "Женские голоса" })).toHaveAttribute(
-      "href",
-      "/diktory/zhenskie_golosa",
-    );
-    expect(navigation.getByRole("link", { name: "Локализация" })).toHaveAttribute("href", "/perevod");
-    expect(navigation.getByRole("link", { name: "← В дашборд" })).toHaveAttribute("href", "/");
-    expect(navigation.getByText("kupigolos-diktory-seo.html")).toBeInTheDocument();
-    expect(navigation.getByText("kupigolos-aktery-dublyazha.html")).toBeInTheDocument();
-    expect(navigation.getByText("kupigolos-izvestnye-diktory-seo-prototype.html")).toBeInTheDocument();
-    expect(navigation.getByText("kupigolos-zhenskie-golosa-seo.html")).toBeInTheDocument();
-    expect(navigation.getByText("kupigolos-lokalizaciya-kontenta-seo.html")).toBeInTheDocument();
-    expect(screen.queryByRole("link", { name: "Обсудить проект" })).not.toBeInTheDocument();
-    expect(container.querySelector('a[href^="tel:"]')).not.toBeInTheDocument();
+    expect(container.querySelector("header > div")).toHaveClass("site-header-inner");
+    expect(navigation.getByRole("button", { name: "Услуги" })).toBeInTheDocument();
+    expect(navigation.getByRole("button", { name: "Дикторы" })).toBeInTheDocument();
+    expect(navigation.getByRole("button", { name: "ИИ сервисы" })).toBeInTheDocument();
+    expect(navigation.getByRole("button", { name: "Инфопортал" })).toBeInTheDocument();
+    expect(navigation.getByRole("link", { name: "Статьи" })).toHaveAttribute("href", "https://kupigolos.ru/articles");
+    expect(screen.getByRole("link", { name: "КупиГолос, на главную" })).toHaveAttribute("href", "/");
+    expect(screen.getByRole("button", { name: "Телефон" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Мессенджеры и социальные сети" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Избранное" })).toBeInTheDocument();
   });
 });
 

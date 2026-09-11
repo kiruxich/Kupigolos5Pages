@@ -1,130 +1,81 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import type { SeoDocumentKey } from "@/lib/seo-page-config";
-import { seoPages } from "@/lib/seo-pages";
 
-const pageLinks: ReadonlyArray<{
-  href: string;
-  label: string;
-  documentKey?: SeoDocumentKey;
-  sourceFile?: string;
-}> = [
-  ...seoPages.map((page) => ({
-    href: page.href,
-    label: page.navigationLabel,
-    documentKey: page.documentKey,
-    sourceFile: page.sourceFile,
-  })),
-  { href: "/", label: "← В дашборд" },
-];
+const site = "https://kupigolos.ru";
+type PanelName = "services" | "voices" | "ai" | "info";
+type Group = { title?: string; links: Array<[string, string]> };
 
-function Logo() {
-  return (
-    <span className="inline-flex items-center gap-2.5 text-[17px] font-extrabold tracking-[-0.04em] text-white">
-      <svg
-        className="h-8 w-8 text-white"
-        viewBox="0 0 44 44"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.4"
-        aria-hidden="true"
-      >
-        <path d="M4 22h4m4-7v14m5-20v26m6-20v14m6-9v4m6-9v14m5-7h4" />
-      </svg>
-      <span>
-        купи<span className="text-white">голос</span>
-      </span>
-    </span>
-  );
+const panels: Record<PanelName, { title: string; groups: Group[] }> = {
+  services: { title: "Услуги", groups: [
+    { title: "Озвучка видео", links: [["Фильмов и сериалов", "/ozvuchka-filmov"], ["Мультфильмов", "/ozvuchka-multfilmov"], ["YouTube каналов", "/ozvuchka-video-youtube"], ["Видеорекламы", "/ozvuchka-videoreklamy"]] },
+    { title: "Работа с аудио", links: [["Озвучка игр", "/ozvuchka-igr"], ["Озвучка рекламы", "/ozvuchka-reklamy"], ["Запись аудиогидов", "/audiogidy"], ["Запись аудиокниг", "/audioknigi"], ["Рекламные аудиоролики", "/reklamnyie-audioroliki"], ["Голосовые приветствия", "/zapis-avtootvetchik-ivr"]] },
+    { title: "Работа с текстом", links: [["Перевод и укладка", "/perevod"], ["Сценарии аудиороликов", "/scenarii-audiorolikov"]] },
+    { title: "Локализация и перевод", links: [["Перевод видео", "/perevod-i-ozvuchka-video"], ["Перевод игр", "/lokalizaciya-igr"], ["Перевод фильмов и сериалов", "/ozvuchka-filmov"]] },
+    { title: "Другие услуги", links: [["Озвучка презентаций / слайдов", "/ozvuchka-prezentacij"], ["Озвучка обучающих материалов", "/ozvuchka-obuchayushhih-materialov"]] },
+  ] },
+  voices: { title: "Дикторы", groups: [
+    { links: [["Иностранные дикторы", "/diktory/inostrannye_golosa"]] },
+    { title: "Русские дикторы", links: [["Федеральные", "/diktory/izvestnye_golosa"], ["Региональные", "/diktory/reginalnye_golosa"]] },
+    { links: [["Актеры озвучки", "/diktory/dubbing"]] }, { links: [["Контакты дикторов", "/diktory/napryamuiu"]] }, { links: [["ИИ голоса", "/ai"]] },
+  ] },
+  ai: { title: "ИИ сервисы", groups: [
+    { title: "Голос и озвучка", links: [["Аудио", "/ai"], ["Генератор голоса", "/ai/voice/ai-voice-generator"], ["Озвучка текста", "/ai/voice/text-to-speech"], ["ИИ-озвучка", "/ai/voice/ai-voice-over"], ["Каталог голосов", "/ai/voice/library"], ["Изменение голоса", "/ai/voice/changer"]] },
+    { title: "Музыка и песни", links: [["Генератор музыки", "/ai/music/ai-music-generator"], ["Генератор песен", "/ai/music/song-generator"], ["Генератор текстов песен", "/ai/music/lyrics-generator"], ["Создание музыки в Suno", "/ai/models/suno/music"]] },
+    { title: "Видео и расшифровка", links: [["Озвучка видео", "/ai/dubbing-video"], ["Транскрибация", "/ai/transcription"], ["Аудио в текст", "/ai/transcription/audio-to-text"], ["Видео в текст", "/ai/transcription/video-to-text"]] },
+    { title: "Обработка аудио", links: [["Удаление вокала", "/ai/audio-tools/vocal-remover"], ["Обрезка аудио", "/ai/audio-tools/trim"], ["Конвертеры", "/ai/audio-tools/converter"]] },
+  ] },
+  info: { title: "Инфопортал", groups: [{ links: [["Кто озвучивает", "/kto-ozvuchivaet"]] }, { links: [["Что посмотреть", "https://info.kupigolos.ru/"]] }] },
+};
+
+const url = (path: string) => path.startsWith("http") ? path : `${site}${path}`;
+
+function HeaderPanel({ name, open }: { name: PanelName; open: boolean }) {
+  const { title, groups } = panels[name];
+  return <section className={`header-mega ${open ? "is-open" : ""}`} id={`header-panel-${name}`} aria-hidden={!open} aria-label={title}>
+    <div className={`header-shell header-mega-grid header-mega-grid-${name}`}>
+      {groups.map((group, index) => <div key={`${name}-${index}`}>{group.title ? <p>{group.title}</p> : null}{group.links.map(([label, path]) => <a className={!group.title ? "header-mega-group-link" : undefined} href={url(path)} key={label}>{label}</a>)}</div>)}
+      {name !== "info" ? <a className="header-mega-feature" href={`${site}/ai`}><span>ИИ сервисы</span><strong>Озвучьте свой проект с помощью нейросети</strong><i aria-hidden="true">Перейти в сервисы →</i></a> : null}
+    </div>
+  </section>;
 }
 
-function HeaderLink({
-  href,
-  label,
-  active,
-  sourceFile,
-  mobile = false,
-}: {
-  href: string;
-  label: string;
-  active: boolean;
-  sourceFile?: string;
-  mobile?: boolean;
-}) {
-  return (
-    <Link
-      className={
-        mobile
-          ? `flex min-h-[54px] flex-col items-start justify-center rounded-xl px-4 py-2.5 transition-colors ${active ? "bg-white text-[#a63c28]" : "text-white hover:bg-white/15"}`
-          : `flex min-h-[48px] flex-col items-start justify-center whitespace-nowrap rounded-xl px-2.5 py-1.5 transition-colors ${active ? "bg-white/20 text-white" : "text-white/85 hover:bg-white/12 hover:text-white"}`
-      }
-      href={href}
-      aria-label={label}
-      aria-current={active ? "page" : undefined}
-    >
-      <span>{label}</span>
-      {sourceFile ? (
-        <span
-          className={
-            mobile
-              ? `mt-0.5 break-all font-mono text-[10px] font-medium leading-4 ${active ? "text-[#a63c28]/65" : "text-white/55"}`
-              : "mt-0.5 block max-w-[180px] truncate font-mono text-[9px] font-medium leading-3 text-white/55"
-          }
-          title={sourceFile}
-        >
-          {sourceFile}
-        </span>
-      ) : null}
-    </Link>
-  );
-}
+export function SiteHeader({ documentKey: _documentKey }: { documentKey: SeoDocumentKey }) {
+  const [panel, setPanel] = useState<PanelName | null>(null);
+  const [popover, setPopover] = useState<"phone" | "networks" | "utility" | null>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
 
-export function SiteHeader({ documentKey }: { documentKey: SeoDocumentKey }) {
-  return (
-    <header className="fixed inset-x-0 top-2.5 z-50 px-3">
-      <div className="mx-auto flex min-h-[72px] max-w-[1540px] items-center gap-3 rounded-[17px] border border-white/15 bg-[#c1492e] px-4 text-white shadow-[0_8px_24px_rgba(72,35,30,.18)] sm:px-6 lg:px-8">
-        <Link href="/" aria-label="КупиГолос, в дашборд">
-          <Logo />
-        </Link>
+  useEffect(() => {
+    const close = (event: MouseEvent) => { if (!rootRef.current?.contains(event.target as Node)) { setPanel(null); setPopover(null); } };
+    const escape = (event: KeyboardEvent) => { if (event.key === "Escape") { setPanel(null); setPopover(null); setMobileOpen(false); } };
+    document.addEventListener("mousedown", close); document.addEventListener("keydown", escape);
+    return () => { document.removeEventListener("mousedown", close); document.removeEventListener("keydown", escape); };
+  }, []);
 
-        <nav
-          className="ml-auto hidden items-center gap-1 text-[13px] font-semibold min-[1400px]:flex 2xl:gap-2 2xl:text-sm"
-          aria-label="Основная навигация"
-        >
-          {pageLinks.map((link) => (
-            <HeaderLink
-              key={link.href}
-              href={link.href}
-              label={link.label}
-              active={link.documentKey === documentKey}
-              sourceFile={link.sourceFile}
-            />
-          ))}
-        </nav>
+  const togglePanel = (name: PanelName) => { setPanel((value) => value === name ? null : name); setPopover(null); };
+  const togglePopover = (name: "phone" | "networks" | "utility") => { setPopover((value) => value === name ? null : name); setPanel(null); };
 
-        <details className="group relative ml-auto min-[1400px]:hidden">
-          <summary className="flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-xl bg-white/12 transition hover:bg-white/20 [&::-webkit-details-marker]:hidden">
-            <span className="sr-only">Открыть навигацию</span>
-            <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-              <path d="M4 7h16M4 12h16M4 17h16" />
-            </svg>
-          </summary>
-          <nav
-            className="absolute right-0 top-[calc(100%+12px)] grid w-[min(88vw,330px)] gap-1 rounded-2xl border border-white/15 bg-[#a63c28] p-2 text-sm font-semibold shadow-[0_18px_42px_rgba(72,35,30,.28)]"
-            aria-label="Мобильная навигация"
-          >
-            {pageLinks.map((link) => (
-              <HeaderLink
-                key={link.href}
-                href={link.href}
-                label={link.label}
-                active={link.documentKey === documentKey}
-                sourceFile={link.sourceFile}
-                mobile
-              />
-            ))}
-          </nav>
-        </details>
+  return <div ref={rootRef}>
+    <header className="site-header" data-header><div className="site-header-inner header-shell">
+      <Link className="brand" href="/" aria-label="КупиГолос, на главную"><img src="/assets/kupigolos-logo-white.svg" alt="" width="109" height="51" /></Link>
+      <nav className="site-nav" id="site-nav" aria-label="Основная навигация">
+        {(["services", "voices"] as PanelName[]).map((name) => <button type="button" key={name} onClick={() => togglePanel(name)} aria-expanded={panel === name} aria-controls={`header-panel-${name}`}>{panels[name].title}</button>)}
+        <button className="header-ai-trigger" type="button" onClick={() => togglePanel("ai")} aria-expanded={panel === "ai"} aria-controls="header-panel-ai"><i aria-hidden="true" />ИИ сервисы</button>
+        <button type="button" onClick={() => togglePanel("info")} aria-expanded={panel === "info"} aria-controls="header-panel-info">Инфопортал</button><a href={`${site}/articles`}>Статьи</a>
+      </nav>
+      <div className="header-actions">
+        <div className="header-popover"><button className="header-phone" type="button" onClick={() => togglePopover("phone")} aria-expanded={popover === "phone"} aria-controls="header-phone-popover" aria-label="Телефон"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.1 3.8 4.7 5.1c-.8.5-1.1 1.5-.7 2.4 2.7 6.7 8 12 14.7 14.7.9.4 1.9.1 2.4-.7l1.3-2.4-4.2-2.2-1.4 1.5a14.7 14.7 0 0 1-5.2-5.2l1.5-1.4-2.2-4.2Z" /></svg></button><div className={`header-action-popover header-phone-popover ${popover === "phone" ? "is-open" : ""}`} id="header-phone-popover" aria-hidden={popover !== "phone"}><a href="tel:88002004551">8 800 200-45-51</a><a className="header-callback-button" href="#contacts">Заказать звонок</a></div></div>
+        <div className="header-popover"><button className="header-networks" type="button" onClick={() => togglePopover("networks")} aria-expanded={popover === "networks"} aria-controls="header-networks-popover" aria-label="Мессенджеры и социальные сети"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a7.4 7.4 0 0 1-8 7.4 8.5 8.5 0 0 1-3.3-.7L4 20l1.8-4.1A7.2 7.2 0 0 1 4.6 12 7.4 7.4 0 0 1 12 4.6a7.4 7.4 0 0 1 8 6.9Z" /></svg></button><nav className={`header-action-popover header-networks-popover ${popover === "networks" ? "is-open" : ""}`} id="header-networks-popover" aria-hidden={popover !== "networks"} aria-label="Связаться в мессенджере"><a href="https://telegram.dog/studio_kupigolos">TG</a><a href="https://max.ru/u/f9LHodD0cOK-G2obtd_M0YIQMT0QPDbV7eVLequXg2kyv2Ns6b_L2NhBBwM">MAX</a><a href="https://wa.me/79302125534">WA</a></nav></div>
+        <a className="header-favorites" href={`${site}/favourites`} aria-label="Избранное"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5 4.8 13.7C1.1 10.2 3 4.5 7.7 4.5c1.8 0 3.4.9 4.3 2.2.9-1.3 2.5-2.2 4.3-2.2 4.7 0 6.6 5.7 2.9 9.2L12 20.5Z" /></svg></a>
+        <button className="nav-toggle" type="button" onClick={() => window.innerWidth <= 1180 ? setMobileOpen((value) => !value) : togglePopover("utility")} aria-expanded={mobileOpen || popover === "utility"} aria-controls="header-utility-menu"><span className="nav-toggle-icon" aria-hidden="true"><i /><i /><i /></span><span className="sr-only">Открыть меню</span></button>
+        <nav className={`header-utility-menu ${popover === "utility" ? "is-open" : ""}`} id="header-utility-menu" aria-hidden={popover !== "utility"} aria-label="Дополнительное меню"><a href={`${site}/login`}>Личный кабинет</a><span aria-hidden="true" /><a href={`${site}/price`}>Цены</a><a href={`${site}/oplata`}>Оплата</a><a href={`${site}/voprosy-i-otvety`}>FAQ</a><a href={`${site}/studio`}>О студии</a><a href="#contacts">Контакты</a></nav>
       </div>
-    </header>
-  );
+    </div></header>
+    <div className="header-mega-layer">{(Object.keys(panels) as PanelName[]).map((name) => <HeaderPanel key={name} name={name} open={panel === name} />)}</div>
+    <aside className={`mobile-menu ${mobileOpen ? "is-open" : ""}`} aria-hidden={!mobileOpen} aria-label="Меню сайта"><button className="drawer-close" type="button" onClick={() => setMobileOpen(false)} aria-label="Закрыть меню">Закрыть <span aria-hidden="true">×</span></button><nav aria-label="Мобильная навигация">{(Object.keys(panels) as PanelName[]).map((name) => <details key={name}><summary>{panels[name].title} <span aria-hidden="true">+</span></summary><div>{panels[name].groups.flatMap((group) => group.links).map(([label, path]) => <a href={url(path)} key={`${name}-${label}`}>{label}</a>)}</div></details>)}<a href={`${site}/articles`}>Статьи</a></nav><div className="mobile-menu-contact"><a href="tel:88002004551">8 800 200-45-51</a><a href="#contacts">Заказать звонок</a></div></aside>
+    {mobileOpen ? <button className="site-overlay is-open" type="button" onClick={() => setMobileOpen(false)} aria-label="Закрыть открытое меню" /> : null}
+  </div>;
 }

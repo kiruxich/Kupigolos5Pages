@@ -1,8 +1,8 @@
 @layer base {
   :root {
-    --seo-ink: #27323f;
-    --seo-heading: #243044;
-    --seo-muted: #69727d;
+    --seo-ink: #3b4173;
+    --seo-heading: #3b4173;
+    --seo-muted: #667093;
     --seo-accent: #c1492e;
     --seo-accent-dark: #a93d28;
     --seo-paper: #f5f3ef;
@@ -15,7 +15,7 @@
   body {
     background: var(--seo-paper);
     color: var(--seo-ink);
-    font-family: Manrope, "Helvetica Neue", Arial, sans-serif;
+    font-family: Roboto, Arial, sans-serif;
   }
 
   ::selection { color: #fff; background: var(--seo-accent); }
@@ -41,7 +41,7 @@
   .seo-document .kg-btn:not(.kg-btn--ghost):not(.secondary):focus-visible { outline: 2px solid #263247; outline-offset: 3px; }
   .seo-document .kg-btn--ghost { min-height: 60px; padding: 0 20px; border: 1px solid var(--seo-line); border-radius: 12px; color: var(--seo-ink); background: rgba(255,255,255,.72); box-shadow: none; }
   .seo-document .kg-btn--ghost:hover { border-color: var(--seo-accent); color: var(--seo-accent); background: #fff; }
-  .seo-document .kg-btn.secondary { min-height: 60px; padding: 0 20px; border: 1px solid rgba(193,73,46,.38); border-radius: 12px; color: #27323f; background: rgba(255,255,255,.58); box-shadow: none; }
+  .seo-document .kg-btn.secondary { min-height: 60px; padding: 0 20px; border: 1px solid rgba(193,73,46,.38); border-radius: 12px; color: #3b4173; background: rgba(255,255,255,.58); box-shadow: none; }
   .seo-document .kg-btn.secondary:hover { border-color: #c1492e; color: #c1492e; background: #fff; box-shadow: 0 10px 22px rgba(82,60,47,.08); transform: translateY(-2px); }
   .seo-document .kg-facts, .seo-document .kg-stats, .seo-document .kg-proof { display: flex; flex-wrap: wrap; gap: 16px 28px; margin-top: 28px; color: var(--seo-muted); font-size: 13px; }
   .seo-document .kg-facts span, .seo-document .kg-stats span, .seo-document .kg-proof span { display: grid; gap: 2px; }
@@ -332,7 +332,7 @@
   .seo-document .kg-faq summary { color: var(--seo-heading); font-size: 16px; }
   .seo-document .kg-faq summary::after { display: grid; width: 32px; height: 32px; flex: none; place-items: center; border: 1px solid rgba(193, 73, 46, .22); border-radius: 9px; font-size: 19px; }
 
-  .seo-document :is(.kg-cta, .kg-final) { width: min(1280px, calc(100% - 56px)); margin-inline: auto; background: linear-gradient(135deg, #27323f, #343f4d); box-shadow: 0 24px 58px rgba(32, 44, 58, .15); }
+  .seo-document :is(.kg-cta, .kg-final) { width: min(1280px, calc(100% - 56px)); margin-inline: auto; background: linear-gradient(135deg, #3b4173, #273778); box-shadow: 0 24px 58px rgba(32, 44, 58, .15); }
   .seo-document :is(.kg-cta, .kg-final) h2 { color: #fff; }
   .seo-document :is(.kg-cta, .kg-final) :is(.kg-btn--ghost, .kg-btn.secondary):hover { border-color: #fff; color: #fff; background: rgba(255, 255, 255, .08); }
 
@@ -366,4 +366,67 @@
 
 @media (prefers-reduced-motion: reduce) {
   .seo-document *, .seo-document *::before, .seo-document *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+/* Controls and type mirror the current kupigolos.ru voice profile. */
+@layer components {
+  .seo-document { color: var(--seo-ink); font-family: Roboto, Arial, sans-serif; }
+  .seo-document :is(h1, h2, h3, h4, h5, h6, strong, b, label, legend, td, th, summary) { color: var(--seo-heading); }
+  .seo-document :is(input, select, textarea) { color: var(--seo-heading); font-family: inherit; }
+
+  .seo-document .kg-btn,
+  .seo-document .kg-search button,
+  .seo-document .kg-filter-actions button {
+    min-height: 50px;
+    padding-inline: 22px;
+    border: 1px solid var(--seo-accent);
+    border-radius: 15px;
+    color: #fff;
+    background: var(--seo-accent);
+    box-shadow: none;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    transition: opacity .2s ease;
+  }
+  .seo-document .kg-btn::before { display: none !important; }
+  .seo-document .kg-btn:hover,
+  .seo-document .kg-search button:hover,
+  .seo-document .kg-filter-actions button:hover {
+    color: #fff;
+    background: var(--seo-accent);
+    box-shadow: none;
+    opacity: .88;
+    transform: none;
+  }
+  .seo-document :is(.kg-btn--ghost, .kg-btn.secondary),
+  .seo-document .kg-filter-actions .reset {
+    border-color: var(--seo-accent);
+    border-radius: 15px;
+    color: var(--seo-accent);
+    background: transparent;
+  }
+  .seo-document :is(.kg-btn--ghost, .kg-btn.secondary):hover,
+  .seo-document .kg-filter-actions .reset:hover {
+    color: var(--seo-accent);
+    background: transparent;
+    opacity: .75;
+  }
+  .seo-document .kg-source-player,
+  .seo-document .kg-voice-actions a { color: var(--seo-heading); }
+  .seo-document .kg-voice-actions { gap: 8px; padding: 12px; border-top: 1px solid var(--seo-line); }
+  .seo-document .kg-voice-actions a {
+    display: grid;
+    min-height: 42px;
+    place-items: center;
+    padding: 8px 12px;
+    border: 1px solid var(--seo-accent);
+    border-radius: 15px;
+    color: var(--seo-accent);
+    background: transparent;
+    transition: opacity .2s ease;
+  }
+  .seo-document .kg-voice-actions a:first-child { border-right: 1px solid var(--seo-accent); color: #fff; background: var(--seo-accent); }
+  .seo-document .kg-voice-actions a:hover { color: inherit; background: inherit; opacity: .8; }
+  .seo-document :is(.kg-cta, .kg-final) { background: linear-gradient(135deg, #3b4173, #273778); }
 }
