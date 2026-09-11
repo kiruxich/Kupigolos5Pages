@@ -442,9 +442,9 @@
     min-width: 0;
     align-items: center;
     gap: 4px;
-    padding: 5px 10px;
-    border: 1px solid rgba(193,73,46,.45);
-    border-radius: 999px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
     color: var(--seo-accent);
     background: #fff;
     font-size: 10px;
@@ -481,10 +481,10 @@
     grid-template-columns: 1fr 1fr;
     gap: 10px;
     margin-top: 28px;
-    padding: 13px;
-    border: 1px solid rgba(193,73,46,.42);
-    border-radius: 20px;
-    background: #fff;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
   }
   .seo-document .kg-hero :is(.kg-collage,.kg-hero-visual) { display: none; }
 
