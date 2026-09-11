@@ -106,30 +106,30 @@ describe("SEO page content contracts", () => {
 });
 
 describe("shared SEO header", () => {
-  it("matches the three-tier Figma header navigation and actions", () => {
+  it("reuses the complete orange main-site header on every SEO page", () => {
     const { container } = render(<SiteHeader documentKey="dubbing" />);
     const navigation = within(screen.getByRole("navigation", { name: "Основная навигация" }));
-    const utility = within(screen.getByRole("navigation", { name: "Сервисная навигация" }));
 
     expect(container.querySelector("header > div")).toHaveClass("site-header-inner");
-    expect(utility.getByRole("link", { name: "Цены" })).toBeInTheDocument();
-    expect(utility.getByRole("link", { name: "Контакты" })).toHaveAttribute("href", "#contacts");
-    expect(navigation.getByRole("link", { name: "Услуги" })).toBeInTheDocument();
-    expect(navigation.getByRole("link", { name: "Дикторы" })).toHaveAttribute("href", "/diktory");
-    expect(navigation.getByRole("link", { name: "ИИ сервисы" })).toHaveAttribute("href", "https://kupigolos.ru/ai");
-    expect(navigation.getByRole("link", { name: "Инфопортал" })).toBeInTheDocument();
+    expect(navigation.getByRole("button", { name: "Услуги" })).toBeInTheDocument();
+    expect(navigation.getByRole("button", { name: "Дикторы" })).toBeInTheDocument();
+    expect(navigation.getByRole("button", { name: "ИИ сервисы" })).toBeInTheDocument();
+    expect(navigation.getByRole("button", { name: "Инфопортал" })).toBeInTheDocument();
     expect(navigation.getByRole("link", { name: "Статьи" })).toHaveAttribute("href", "https://kupigolos.ru/articles");
     expect(screen.getByRole("link", { name: "КупиГолос, на главную" })).toHaveAttribute("href", "/");
-    expect(screen.getByRole("link", { name: "Позвонить" })).toHaveAttribute("href", "tel:88002004551");
-    expect(screen.getByRole("link", { name: "Мессенджеры и социальные сети" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Избранное в основном меню" })).toBeInTheDocument();
-    const partner = container.querySelector(".header-partner")!;
-    expect(partner.querySelector('img[alt="Кинопоиск"]')).toHaveAttribute("src", "/assets/Kinopoisk.svg");
-    expect(partner.querySelector('img[alt="КупиГолос"]')).toHaveAttribute("src", "/assets/Kupigolos.svg");
+    expect(screen.getByRole("button", { name: "Телефон" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Мессенджеры и социальные сети" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Избранное" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Дополнительное меню" })).toBeInTheDocument();
+    expect(container.querySelector('.brand img')).toHaveAttribute("src", "/assets/logo.svg");
+    expect(container.querySelector('img[src="/assets/header_phone.svg"]')).toBeInTheDocument();
+    expect(container.querySelector('img[src="/assets/header_networks.svg"]')).toBeInTheDocument();
+    expect(container.querySelector('img[src="/assets/header_like.svg"]')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Мессенджеры и социальные сети" }));
     expect(screen.getByRole("link", { name: "Telegram" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "WhatsApp" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Избранное" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Личный кабинет" })).toBeInTheDocument();
+    fireEvent.click(navigation.getByRole("button", { name: "Услуги" }));
+    expect(screen.getByRole("region", { name: "Услуги" })).toHaveClass("is-open");
   });
 });
 

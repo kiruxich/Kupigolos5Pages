@@ -1,114 +1,135 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { SeoDocumentKey } from "@/lib/seo-page-config";
 
 const site = "https://kupigolos.ru";
+const asset = (name: string) => `/assets/${name}`;
+
+type PanelName = "services" | "voices" | "ai" | "info";
+type HeaderLink = readonly [label: string, path: string];
+type HeaderGroup = { title: string; titlePath?: string; description?: string; links?: readonly HeaderLink[] };
+
+const panels: Record<PanelName, { title: string; groups: readonly HeaderGroup[]; compact?: boolean }> = {
+  services: {
+    title: "Услуги",
+    groups: [
+      { title: "Озвучка видео", titlePath: "/ozvuchka-video", links: [["Фильмов и сериалов", "/ozvuchka-filmov"], ["Мультфильмов", "/ozvuchka-multfilmov"], ["YouTube каналов", "/ozvuchka-video-youtube"], ["Видеорекламы", "/ozvuchka-videoreklamy"]] },
+      { title: "Работа с аудио", links: [["Озвучка игр", "/ozvuchka-igr"], ["Озвучка рекламы", "/ozvuchka-reklamy"], ["Запись аудиогидов", "/audiogidy"], ["Запись аудиокниг", "/audioknigi"], ["Рекламные аудиоролики", "/reklamnyie-audioroliki"], ["Голосовые приветствия", "/zapis-avtootvetchik-ivr"]] },
+      { title: "Работа с текстом", links: [["Перевод и укладка", "/perevod"], ["Сценарии аудиороликов", "/scenarii-audiorolikov"]] },
+      { title: "Локализация и перевод", titlePath: "/perevod", links: [["Перевод видео", "/perevod-i-ozvuchka-video"], ["Перевод игр", "/lokalizaciya-igr"], ["Перевод фильмов и сериалов", "/perevod-filmov-i-serialov"]] },
+      { title: "Другие услуги", links: [["Озвучка презентаций / слайдов", "/ozvuchka-prezentacij"], ["Озвучка обучающих материалов", "/ozvuchka-obuchayushchih-materialov"]] },
+    ],
+  },
+  voices: {
+    title: "Дикторы",
+    groups: [
+      { title: "Иностранные дикторы", titlePath: "/diktory/inostrannye_golosa" },
+      { title: "Русские дикторы", links: [["Федеральные", "/diktory/izvestnye_golosa"], ["Региональные", "/diktory/reginalnye_golosa"]] },
+      { title: "Актеры озвучки", titlePath: "/diktory/dubbing" },
+      { title: "Контакты дикторов", titlePath: "/diktory/napryamuiu" },
+      { title: "ИИ голоса", titlePath: "/diktory/ai" },
+    ],
+  },
+  ai: {
+    title: "ИИ сервисы",
+    groups: [
+      { title: "Голос и озвучка", links: [["Аудио", "/ai"], ["Генератор голоса", "/ai/voice/ai-voice-generator"], ["Озвучка текста", "/ai/voice/text-to-speech"], ["ИИ-озвучка", "/ai/voice/ai-voice-over"], ["Каталог голосов", "/ai/voice/library"], ["Изменение голоса", "/ai/voice/changer"]] },
+      { title: "Музыка и песни", links: [["Генератор музыки", "/ai/music/ai-music-generator"], ["Генератор песен", "/ai/music/song-generator"], ["Генератор текстов песен", "/ai/music/lyrics-generator"], ["Создание музыки в Suno", "/ai/models/suno/music"]] },
+      { title: "Видео и расшифровка", links: [["Озвучка видео", "/ai/dubbing-video"], ["Извлечение звука из видео", "/ai/audio-tools/extract-audio"], ["Видео в MP3", "/ai/audio-tools/video-to-mp3"], ["Транскрибация", "/ai/transcription"], ["Аудио в текст", "/ai/transcription/audio-to-text"], ["Видео в текст", "/ai/transcription/video-to-text"]] },
+      { title: "Обработка аудио", links: [["Удаление вокала", "/ai/audio-tools/vocal-remover"], ["Обрезка аудио", "/ai/audio-tools/trim"], ["Конвертеры", "/ai/audio-tools/converter"], ["Конвертер в MP3", "/ai/audio-tools/converter/to-mp3"], ["WAV в MP3", "/ai/audio-tools/converter/wav-to-mp3"], ["MP3 в WAV", "/ai/audio-tools/converter/mp3-to-wav"]] },
+      { title: "ИИ модели", links: [["Suno AI", "/ai/models/suno"], ["ElevenLabs", "/ai/models/elevenlabs"], ["Fish Audio", "/ai/models/fish-audio"], ["HeyGen", "/ai/models/heygen"], ["Yandex SpeechKit", "/ai/models/yandex-speechkit"]] },
+    ],
+  },
+  info: {
+    title: "Инфопортал",
+    compact: true,
+    groups: [
+      { title: "Кто озвучивает", titlePath: "/kto-ozvuchivaet", description: "Актёры озвучки, персонажи и известные роли" },
+      { title: "Что посмотреть", titlePath: "https://info.kupigolos.ru/", description: "Фильмы, сериалы и идеи для просмотра" },
+    ],
+  },
+};
 
 const utilityLinks = [
-  ["Цены", `${site}/price`],
-  ["Оплата", `${site}/oplata`],
-  ["FAQ", `${site}/voprosy-i-otvety`],
-  ["О студии", `${site}/studio`],
-  ["Контакты", "#contacts"],
+  ["Личный кабинет", "/login"], ["Цены", "/price"], ["Оплата", "/oplata"],
+  ["FAQ", "/voprosy-i-otvety"], ["О студии", "/studio"], ["Контакты", "/contacts"],
 ] as const;
 
-const primaryLinks = [
-  ["Услуги", site],
-  ["Дикторы", "/diktory"],
-  ["ИИ сервисы", `${site}/ai`],
-  ["Инфопортал", "https://info.kupigolos.ru/"],
-  ["Статьи", `${site}/articles`],
-] as const;
+const externalUrl = (path: string) => path.startsWith("http") ? path : `${site}${path}`;
 
-function TelegramIcon() {
-  return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m20.6 4.2-3 14.2c-.2 1-1 1.2-1.8.7l-4.6-3.4-2.2 2.1c-.2.3-.5.5-.9.5l.3-4.7 8.7-7.9c.4-.3-.1-.5-.6-.2L5.7 12.3 1.1 10.9c-1-.3-1-1 .2-1.5l18-6.9c.8-.3 1.5.2 1.3 1.7Z" /></svg>;
+function AiWave() {
+  return <svg className="header-ai-wave" viewBox="0 0 20 16" aria-hidden="true"><path d="M0 8h2l1.2-5 2 10 2-8 2 6 2-9 2 12 2-7 1.3 3H20" fill="none" stroke="currentColor" strokeWidth="1.5" /></svg>;
 }
 
-function WhatsAppIcon() {
-  return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 11.8a8.3 8.3 0 0 1-12.3 7.3L3.5 20.5l1.4-4.6A8.3 8.3 0 1 1 20.5 11.8Z" /><path d="M8.2 7.5c.2-.4.4-.4.8-.4h.5c.2 0 .4 0 .5.4l.7 1.7c.1.3.1.5-.1.7l-.6.8c-.2.2-.2.4-.1.6.7 1.2 1.7 2.2 3 2.8.2.1.4.1.6-.1l.9-1.1c.2-.2.4-.3.7-.2l1.8.9c.3.1.5.3.5.5-.1.8-.5 1.5-1.1 2-.6.5-1.5.7-2.3.5-1.2-.3-2.4-.8-3.4-1.5a11 11 0 0 1-3.5-4.3c-.5-1.1-.5-2.2.1-3.3Z" /></svg>;
-}
-
-function HeartIcon() {
-  return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5 4.8 13.7C1.1 10.2 3 4.5 7.7 4.5c1.8 0 3.4.9 4.3 2.2.9-1.3 2.5-2.2 4.3-2.2 4.7 0 6.6 5.7 2.9 9.2L12 20.5Z" /></svg>;
-}
-
-function AccountIcon() {
-  return <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5" /><path d="M5.5 20c.4-4.1 2.6-6.2 6.5-6.2s6.1 2.1 6.5 6.2Z" /></svg>;
-}
-
-function PhoneIcon() {
-  return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.3c1.2.4 2.4.6 3.6.6a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.6 21 3 13.4 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 .9c.1 1.2.3 2.4.7 3.5a1 1 0 0 1-.3 1l-2.2 2.2Z" /></svg>;
-}
-
-function MessengerIcon() {
-  return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a7.4 7.4 0 0 1-8 7.4 8.5 8.5 0 0 1-3.3-.7L4 20l1.8-4.1A7.2 7.2 0 0 1 4.6 12 7.4 7.4 0 0 1 12 4.6a7.4 7.4 0 0 1 8 6.9Z" /></svg>;
+function HeaderPanel({ name, open }: { name: PanelName; open: boolean }) {
+  const panel = panels[name];
+  return (
+    <section className={`header-panel${panel.compact ? " header-panel--compact" : ""}${open ? " is-open" : ""}`} id={`header-panel-${name}`} aria-hidden={!open} aria-label={panel.title}>
+      <div className="header-panel-content">
+        <div className="header-panel-main">
+          <nav className="header-panel-links" aria-label={`Разделы ${panel.title.toLowerCase()}`}>
+            {panel.groups.map((group, index) => (
+              <div className={`header-panel-row${index === 0 ? " is-active" : ""}`} key={group.title}>
+                {group.titlePath ? <a className="header-panel-title" href={externalUrl(group.titlePath)}><span>{group.title}</span>{group.description ? <small>{group.description}</small> : null}</a> : <span className="header-panel-title" tabIndex={0}>{group.title}</span>}
+                {group.links?.length ? <div className="header-panel-submenu">{group.links.map(([label, path]) => <a href={externalUrl(path)} key={label}>{label}</a>)}</div> : null}
+              </div>
+            ))}
+          </nav>
+          {!panel.compact ? <div className="header-panel-footer"><div className="header-panel-callback"><a href="tel:88002004551">8 800 200-45-51</a><a href="#contacts">Заказать звонок</a></div><nav className="header-panel-socials" aria-label="Мессенджеры"><a href="https://telegram.dog/kupigolos_channel" target="_blank" rel="noopener" aria-label="Telegram"><img src={asset("telegram_red.svg")} alt="" /></a><a href="https://max.ru/u/f9LHodD0cOK-G2obtd_M0YIQMT0QPDbV7eVLequXg2kyv2Ns6b_L2NhBBwM" target="_blank" rel="noopener" aria-label="MAX"><img src={asset("max_red.svg")} alt="" /></a></nav></div> : null}
+        </div>
+        {!panel.compact ? <aside className="header-panel-promo"><p>Озвучьте свой проект с помощью нейросети</p><a href="https://ai.kupigolos.ru/" target="_blank" rel="noopener">Сгенерировать озвучку</a><img className="header-panel-mic" src={asset("header-mic.png")} alt="" aria-hidden="true" /><img className="header-panel-art" src={asset("logo_info.svg")} alt="" aria-hidden="true" /></aside> : null}
+      </div>
+    </section>
+  );
 }
 
 export function SiteHeader({ documentKey: _documentKey }: { documentKey: SeoDocumentKey }) {
+  const [panel, setPanel] = useState<PanelName | null>(null);
+  const [popover, setPopover] = useState<"phone" | "networks" | "utility" | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const escape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setMobileOpen(false);
+    const closeOutside = (event: MouseEvent) => {
+      if (!rootRef.current?.contains(event.target as Node)) { setPanel(null); setPopover(null); }
     };
-    document.addEventListener("keydown", escape);
-    return () => document.removeEventListener("keydown", escape);
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") { setPanel(null); setPopover(null); setMobileOpen(false); }
+    };
+    document.addEventListener("mousedown", closeOutside);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => { document.removeEventListener("mousedown", closeOutside); document.removeEventListener("keydown", closeOnEscape); };
   }, []);
 
+  const togglePanel = (name: PanelName) => { setPanel((value) => value === name ? null : name); setPopover(null); };
+  const togglePopover = (name: "phone" | "networks" | "utility") => { setPopover((value) => value === name ? null : name); setPanel(null); };
+
   return (
-    <div className="header-stage">
+    <div className="header-root" ref={rootRef}>
       <header className="site-header" data-header>
-        <div className="site-header-inner header-shell">
-          <div className="header-topline">
-            <nav className="header-utility-links" aria-label="Сервисная навигация">
-              {utilityLinks.map(([label, href]) => <a href={href} key={label}>{label}</a>)}
-            </nav>
-            <div className="header-top-actions">
-              <a className="header-email" href="mailto:info@kupigolos.ru">info@kupigolos.ru</a>
-              <a className="header-social header-social--telegram" href="https://telegram.dog/studio_kupigolos" target="_blank" rel="noopener" aria-label="Telegram"><TelegramIcon /></a>
-              <a className="header-social header-social--whatsapp" href="whatsapp://send?phone=79302125534" aria-label="WhatsApp"><WhatsAppIcon /></a>
-              <a className="header-icon-link" href={`${site}/favourites`} aria-label="Избранное"><HeartIcon /><span>0</span></a>
-              <a className="header-icon-link" href={`${site}/login`} aria-label="Личный кабинет"><AccountIcon /><span>0</span></a>
-            </div>
+        <div className="site-header-inner">
+          <Link className="brand" href="/" aria-label="КупиГолос, на главную"><img src={asset("logo.svg")} alt="КупиГолос" /></Link>
+          <nav className="site-nav" aria-label="Основная навигация">
+            <button type="button" onClick={() => togglePanel("services")} aria-expanded={panel === "services"} aria-controls="header-panel-services">Услуги</button>
+            <button type="button" onClick={() => togglePanel("voices")} aria-expanded={panel === "voices"} aria-controls="header-panel-voices">Дикторы</button>
+            <button className="header-ai-trigger" type="button" onClick={() => togglePanel("ai")} aria-expanded={panel === "ai"} aria-controls="header-panel-ai"><AiWave />ИИ сервисы</button>
+            <button type="button" onClick={() => togglePanel("info")} aria-expanded={panel === "info"} aria-controls="header-panel-info">Инфопортал</button>
+            <a href={`${site}/articles`}>Статьи</a>
+          </nav>
+          <div className="header-actions">
+            <div className="header-popover"><button className="header-action-button" type="button" onClick={() => togglePopover("phone")} aria-expanded={popover === "phone"} aria-controls="header-phone-popover" aria-label="Телефон"><img src={asset("header_phone.svg")} alt="" /><img className="is-hover" src={asset("header_phone_hover.svg")} alt="" /></button><div className={`header-action-popover header-phone-popover${popover === "phone" ? " is-open" : ""}`} id="header-phone-popover" aria-hidden={popover !== "phone"}><a href="tel:88002004551">8 800 200-45-51</a><a href="#contacts">Заказать звонок</a></div></div>
+            <div className="header-popover"><button className="header-action-button" type="button" onClick={() => togglePopover("networks")} aria-expanded={popover === "networks"} aria-controls="header-networks-popover" aria-label="Мессенджеры и социальные сети"><img src={asset("header_networks.svg")} alt="" /><img className="is-hover" src={asset("header_networks_hover.svg")} alt="" /></button><nav className={`header-action-popover header-networks-popover${popover === "networks" ? " is-open" : ""}`} id="header-networks-popover" aria-hidden={popover !== "networks"} aria-label="Связаться в мессенджере"><a href="https://telegram.dog/studio_kupigolos" target="_blank" rel="noopener" aria-label="Telegram"><img src={asset("telegram.svg")} alt="" /><img className="is-hover" src={asset("telegram_hover.svg")} alt="" /></a><a href="https://max.ru/u/f9LHodD0cOK-G2obtd_M0YIQMT0QPDbV7eVLequXg2kyv2Ns6b_L2NhBBwM" target="_blank" rel="noopener" aria-label="MAX"><img src={asset("max.svg")} alt="" /></a><a href="whatsapp://send?phone=79302125534" aria-label="WhatsApp"><img src={asset("whatsapp.svg")} alt="" /><img className="is-hover" src={asset("whatsapp_hover.svg")} alt="" /></a></nav></div>
+            <a className="header-action-button" href={`${site}/favourites`} aria-label="Избранное"><img src={asset("header_like.svg")} alt="" /><img className="is-hover" src={asset("header_like_hover.svg")} alt="" /></a>
+            <div className="header-utility"><button className="header-burger" type="button" onClick={() => togglePopover("utility")} aria-expanded={popover === "utility"} aria-controls="header-utility-menu" aria-label="Дополнительное меню"><i /><i /><i /></button><nav className={`header-utility-menu${popover === "utility" ? " is-open" : ""}`} id="header-utility-menu" aria-hidden={popover !== "utility"} aria-label="Дополнительное меню">{utilityLinks.map(([label, path], index) => <a className={index === 1 ? "with-divider" : undefined} href={externalUrl(path)} key={label}>{label}</a>)}</nav></div>
           </div>
-
-          <div className="header-primary">
-            <Link className="brand" href="/" aria-label="КупиГолос, на главную"><img src="/assets/kupigolos-logo-white.svg" alt="" width="109" height="51" /></Link>
-            <nav className="site-nav" aria-label="Основная навигация">
-              {primaryLinks.map(([label, href]) => <a className={label === "ИИ сервисы" ? "header-ai-link" : undefined} href={href} key={label}>{label === "ИИ сервисы" ? <i aria-hidden="true" /> : null}{label}</a>)}
-            </nav>
-            <div className="header-main-actions" aria-label="Быстрые действия">
-              <a className="header-round-action" href="tel:88002004551" aria-label="Позвонить"><PhoneIcon /></a>
-              <a className="header-round-action" href="https://telegram.dog/studio_kupigolos" target="_blank" rel="noopener" aria-label="Мессенджеры и социальные сети"><MessengerIcon /></a>
-              <a className="header-round-action" href={`${site}/favourites`} aria-label="Избранное в основном меню"><HeartIcon /></a>
-            </div>
-            <button className="nav-toggle" type="button" onClick={() => setMobileOpen((value) => !value)} aria-expanded={mobileOpen} aria-controls="mobile-site-menu">
-              <span className="nav-toggle-icon" aria-hidden="true"><i /><i /><i /></span><span className="sr-only">Открыть меню</span>
-            </button>
-          </div>
-
-          <a className="header-partner" href="https://www.kinopoisk.ru/" target="_blank" rel="noopener">
-            <span className="header-partner-content">
-              <img src="/assets/Kinopoisk.svg" alt="Кинопоиск" width="85" height="11" />
-              <span className="header-partner-cross" aria-hidden="true">×</span>
-              <img src="/assets/Kupigolos.svg" alt="КупиГолос" width="60" height="27" />
-              <span className="header-partner-copy">Студия озвучивания с Кинопоиска</span>
-            </span>
-          </a>
+          <button className="header-mobile-toggle" type="button" onClick={() => setMobileOpen((value) => !value)} aria-expanded={mobileOpen} aria-controls="mobile-site-menu" aria-label="Открыть меню"><i /><i /><i /></button>
         </div>
       </header>
-
-      <aside className={`mobile-menu ${mobileOpen ? "is-open" : ""}`} id="mobile-site-menu" aria-hidden={!mobileOpen} aria-label="Меню сайта">
-        <button className="drawer-close" type="button" onClick={() => setMobileOpen(false)} aria-label="Закрыть меню">Меню <span aria-hidden="true">×</span></button>
-        <nav aria-label="Мобильная навигация">
-          {primaryLinks.map(([label, href]) => <a href={href} key={label}>{label}</a>)}
-          {utilityLinks.map(([label, href]) => <a href={href} key={label}>{label}</a>)}
-        </nav>
-        <div className="mobile-menu-contact"><a href="tel:88002004551">8 800 200-45-51</a><a href="#contacts">Быстрый заказ</a></div>
-      </aside>
-      {mobileOpen ? <button className="site-overlay is-open" type="button" onClick={() => setMobileOpen(false)} aria-label="Закрыть открытое меню" /> : null}
+      <div className="header-panel-layer">{(Object.keys(panels) as PanelName[]).map((name) => <HeaderPanel key={name} name={name} open={panel === name} />)}</div>
+      <aside className={`mobile-menu${mobileOpen ? " is-open" : ""}`} id="mobile-site-menu" aria-hidden={!mobileOpen} aria-label="Меню сайта"><button className="drawer-close" type="button" onClick={() => setMobileOpen(false)} aria-label="Закрыть меню">Меню <span aria-hidden="true">×</span></button><nav aria-label="Мобильная навигация"><a href={site}>Услуги</a><a href="/diktory">Дикторы</a><a href={`${site}/ai`}>ИИ сервисы</a><a href="https://info.kupigolos.ru/">Инфопортал</a><a href={`${site}/articles`}>Статьи</a>{utilityLinks.map(([label, path]) => <a href={externalUrl(path)} key={label}>{label}</a>)}</nav><div className="mobile-menu-contact"><a href="tel:88002004551">8 800 200-45-51</a><a href="#contacts">Заказать звонок</a></div></aside>
+      {mobileOpen ? <button className="site-overlay" type="button" onClick={() => setMobileOpen(false)} aria-label="Закрыть открытое меню" /> : null}
     </div>
   );
 }

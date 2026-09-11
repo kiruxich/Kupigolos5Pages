@@ -25,11 +25,35 @@
       "lib_seo_documents_seodocuments",
       "lib_seo_page_config",
       "lib_seo_page_config_seopageconfig",
-      "lib_seo_page_config_seopagename",
+      "lib_seo_page_config_seopagename"
+    ],
+    "1": [
+      "components_seo_catalog_runtime",
+      "components_seo_catalog_runtime_breadcrumbtrails",
+      "components_seo_catalog_runtime_catalogruntime",
+      "components_seo_catalog_runtime_clientlogos",
+      "components_seo_catalog_runtime_createvoicecard",
+      "components_seo_catalog_runtime_dubbingvoiceids",
+      "components_seo_catalog_runtime_famousportraits",
+      "components_seo_catalog_runtime_famousvoiceids",
+      "components_seo_catalog_runtime_normalized",
+      "components_seo_catalog_runtime_pricefrom",
+      "components_seo_catalog_runtime_removeheroactions",
+      "components_seo_catalog_runtime_uselargefamousportraits",
+      "components_seo_catalog_runtime_voicebyid",
+      "components_seo_catalog_runtime_voicecatalogforpage",
+      "components_seo_catalog_runtime_voicemeta",
+      "components_seo_catalog_runtime_withfigmabreadcrumbs",
+      "components_seo_catalog_runtime_women",
+      "components_seo_catalog_runtime_womenvoiceids",
+      "lib_voice_catalog_generated",
+      "lib_voice_catalog_generated_preprodvoicecatalog",
+      "lib_voice_catalog_generated_preprodvoicecatalogidsbypage",
+      "lib_voice_catalog_generated_voicecatalogentry",
       "tests_contracts_seo_pages_test",
       "tests_contracts_seo_pages_test_expectations"
     ],
-    "1": [
+    "2": [
       "jsdom",
       "package_devdependencies",
       "package_devdependencies_jsdom",
@@ -52,7 +76,7 @@
       "typescript",
       "vitest"
     ],
-    "2": [
+    "3": [
       "ref_dom",
       "ref_dom_iterable",
       "ref_esnext",
@@ -74,7 +98,7 @@
       "tsconfig_compileroptions_strict",
       "tsconfig_compileroptions_target"
     ],
-    "3": [
+    "4": [
       "next",
       "package",
       "package_dependencies",
@@ -94,37 +118,32 @@
       "react",
       "react_dom"
     ],
-    "4": [
-      "app_page",
-      "app_page_pageindex",
-      "components_seo_site_header",
-      "components_seo_site_header_accounticon",
-      "components_seo_site_header_hearticon",
-      "components_seo_site_header_primarylinks",
-      "components_seo_site_header_siteheader",
-      "components_seo_site_header_telegramicon",
-      "components_seo_site_header_utilitylinks",
-      "components_seo_site_header_whatsappicon",
-      "lib_seo_page_config_seodocumentkey",
-      "lib_seo_pages",
-      "lib_seo_pages_seopages",
-      "tests_contracts_page_index_test"
-    ],
     "5": [
-      "components_seo_catalog_runtime",
-      "components_seo_catalog_runtime_breadcrumbtrails",
-      "components_seo_catalog_runtime_catalogruntime",
-      "components_seo_catalog_runtime_clientlogos",
-      "components_seo_catalog_runtime_famousportraits",
-      "components_seo_catalog_runtime_normalized",
-      "components_seo_catalog_runtime_pricefrom",
-      "components_seo_catalog_runtime_removeheroactions",
-      "components_seo_catalog_runtime_uselargefamousportraits",
-      "components_seo_catalog_runtime_voicemeta",
-      "components_seo_catalog_runtime_withfigmabreadcrumbs",
-      "components_seo_catalog_runtime_women"
+      "components_seo_site_header",
+      "components_seo_site_header_aiwave",
+      "components_seo_site_header_asset",
+      "components_seo_site_header_externalurl",
+      "components_seo_site_header_headergroup",
+      "components_seo_site_header_headerlink",
+      "components_seo_site_header_headerpanel",
+      "components_seo_site_header_panelname",
+      "components_seo_site_header_panels",
+      "components_seo_site_header_siteheader",
+      "components_seo_site_header_utilitylinks"
     ],
     "6": [
+      "scripts_sync_preprod_voices",
+      "scripts_sync_preprod_voices_absoluteurl",
+      "scripts_sync_preprod_voices_catalogids",
+      "scripts_sync_preprod_voices_catalogpages",
+      "scripts_sync_preprod_voices_getpagecount",
+      "scripts_sync_preprod_voices_loaddocument",
+      "scripts_sync_preprod_voices_normalizetext",
+      "scripts_sync_preprod_voices_readcatalog",
+      "scripts_sync_preprod_voices_readspeakers",
+      "scripts_sync_preprod_voices_speakers"
+    ],
+    "7": [
       "ref_next_dev_types_ts",
       "ref_next_env_d_ts",
       "ref_next_types_ts",
@@ -135,44 +154,54 @@
       "tsconfig_exclude",
       "tsconfig_include"
     ],
-    "7": [
+    "8": [
+      "app_page",
+      "app_page_pageindex",
+      "lib_seo_page_config_seodocumentkey",
+      "lib_seo_pages",
+      "lib_seo_pages_seopages",
+      "tests_contracts_page_index_test"
+    ],
+    "9": [
       "app_layout",
       "app_layout_metadata",
       "app_layout_rootlayout"
     ],
-    "8": [
+    "10": [
       "next_config",
       "next_config_nextconfig"
     ],
-    "9": [
+    "11": [
       "next_env_d",
       "next_env_d_rationale_6"
     ],
-    "10": [
+    "12": [
       "postcss_config",
       "postcss_config_config"
     ],
-    "11": [
+    "13": [
       "vitest_config"
     ],
-    "12": [
+    "14": [
       "vitest_setup"
     ]
   },
   "cohesion": {
-    "0": 0.1396011396011396,
-    "1": 0.09523809523809523,
-    "2": 0.1,
-    "3": 0.1111111111111111,
-    "4": 0.16483516483516483,
-    "5": 0.24242424242424243,
-    "6": 0.2222222222222222,
-    "7": 0.6666666666666666,
-    "8": 1.0,
-    "9": 1.0,
+    "0": 0.14666666666666667,
+    "1": 0.13043478260869565,
+    "2": 0.09523809523809523,
+    "3": 0.1,
+    "4": 0.1111111111111111,
+    "5": 0.2545454545454545,
+    "6": 0.3111111111111111,
+    "7": 0.2222222222222222,
+    "8": 0.4666666666666667,
+    "9": 0.6666666666666666,
     "10": 1.0,
     "11": 1.0,
-    "12": 1.0
+    "12": 1.0,
+    "13": 1.0,
+    "14": 1.0
   },
   "gods": [
     {
@@ -183,7 +212,7 @@
     {
       "id": "components_seo_catalog_runtime_catalogruntime",
       "label": "CatalogRuntime()",
-      "degree": 8
+      "degree": 10
     },
     {
       "id": "lib_seo_page_config_seopageconfig",
@@ -206,6 +235,11 @@
       "degree": 6
     },
     {
+      "id": "components_seo_site_header_siteheader",
+      "label": "SiteHeader()",
+      "degree": 5
+    },
+    {
       "id": "lib_seo_page_config_seodocumentkey",
       "label": "SeoDocumentKey",
       "degree": 4
@@ -219,11 +253,6 @@
       "id": "tsconfig_compileroptions_lib",
       "label": "lib",
       "degree": 4
-    },
-    {
-      "id": "components_seo_site_header_siteheader",
-      "label": "SiteHeader()",
-      "degree": 3
     }
   ],
   "surprises": [],
