@@ -17,6 +17,139 @@
   ::selection { color: #fff; background: var(--seo-action); }
 }
 
+/* Localization directions: reuse the homepage service-card language without changing SEO copy. */
+@layer components {
+  .seo-document #directions .kg-service-links {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: clamp(28px, 4vw, 46px);
+  }
+
+  .seo-document #directions .kg-service-link {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    min-height: 280px;
+    grid-column: span 4;
+    align-content: end;
+    overflow: hidden;
+    padding: clamp(22px, 2.5vw, 30px);
+    border: 1px solid rgba(39, 55, 120, .1);
+    border-radius: 19px;
+    color: var(--seo-ink);
+    background: #faf9f6;
+    box-shadow: 0 18px 48px rgba(39, 55, 120, .065);
+    transition: border-color .25s ease, box-shadow .35s ease, transform .35s cubic-bezier(.16, 1, .3, 1);
+  }
+
+  .seo-document #directions .kg-service-link:nth-child(2) { background: #eef1f8; }
+  .seo-document #directions .kg-service-link:nth-child(3) { background: #fff3ee; }
+
+  .seo-document #directions .kg-service-link::before {
+    position: absolute;
+    z-index: 3;
+    top: 22px;
+    left: clamp(22px, 2.5vw, 30px);
+    color: var(--seo-accent);
+    content: "01";
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: .1em;
+  }
+
+  .seo-document #directions .kg-service-link:nth-child(2)::before { content: "02"; }
+  .seo-document #directions .kg-service-link:nth-child(3)::before { content: "03"; }
+
+  .seo-document #directions .kg-service-link::after {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(250, 249, 246, .08) 0 28%, rgba(250, 249, 246, .95) 67%, #faf9f6 100%);
+    content: "";
+    pointer-events: none;
+  }
+
+  .seo-document #directions .kg-service-link:nth-child(2)::after {
+    background: linear-gradient(180deg, rgba(238, 241, 248, .08) 0 28%, rgba(238, 241, 248, .95) 67%, #eef1f8 100%);
+  }
+
+  .seo-document #directions .kg-service-link:nth-child(3)::after {
+    background: linear-gradient(180deg, rgba(255, 243, 238, .08) 0 28%, rgba(255, 243, 238, .95) 67%, #fff3ee 100%);
+  }
+
+  .seo-document #directions .kg-service-link img {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 32%;
+    transition: transform .55s cubic-bezier(.16, 1, .3, 1);
+  }
+
+  .seo-document #directions .kg-service-link .body {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    gap: 9px;
+    align-content: end;
+  }
+
+  .seo-document #directions .kg-service-link .body strong {
+    max-width: 14ch;
+    color: var(--seo-ink);
+    font-size: clamp(1.55rem, 2.25vw, 2.45rem);
+    font-weight: 720;
+    line-height: .98;
+    letter-spacing: -.035em;
+    text-wrap: balance;
+  }
+
+  .seo-document #directions .kg-service-link .body > span {
+    max-width: 42ch;
+    padding-right: 30px;
+    color: var(--seo-muted);
+    font-size: 13px;
+    font-weight: 450;
+    line-height: 1.5;
+  }
+
+  .seo-document #directions .kg-service-link .body::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: var(--seo-accent);
+    content: "↗";
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  .seo-document #directions .kg-service-link:is(:hover, :focus-visible) {
+    border-color: rgba(193, 73, 46, .34);
+    box-shadow: 0 24px 60px rgba(39, 55, 120, .12);
+    transform: translateY(-4px);
+  }
+
+  .seo-document #directions .kg-service-link:is(:hover, :focus-visible) img { transform: scale(1.035); }
+}
+
+@media (max-width: 980px) {
+  .seo-document #directions .kg-service-link { grid-column: span 6; }
+  .seo-document #directions .kg-service-link:last-child { grid-column: 1 / -1; }
+}
+
+@media (max-width: 680px) {
+  .seo-document #directions .kg-service-link,
+  .seo-document #directions .kg-service-link:last-child {
+    min-height: 250px;
+    grid-column: 1 / -1;
+  }
+
+  .seo-document #directions .kg-service-link .body strong { font-size: clamp(1.7rem, 8vw, 2.25rem); }
+}
+
 @layer components {
   .seo-document { overflow: clip; padding-top: 92px; color: var(--seo-ink); background: var(--seo-page); }
   .seo-document .kg-wrap { width: min(1280px, calc(100% - 64px)); margin-inline: auto; }
