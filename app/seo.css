@@ -1448,3 +1448,137 @@
   }
   .seo-document--localization #languages .kg-tag { min-height: 44px; }
 }
+
+/* Localization voice block: compact editorial split instead of an oversized image card. */
+@layer components {
+  .seo-document--localization #foreign .kg-callout {
+    display: grid;
+    width: 100%;
+    max-width: 1120px;
+    grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr);
+    gap: clamp(36px, 5vw, 76px);
+    align-items: center;
+    margin: 0 auto;
+    padding: clamp(34px, 4.5vw, 58px);
+    border: 1px solid rgba(39, 55, 120, .1);
+    border-radius: 20px;
+    background: #f0f1fa;
+    box-shadow: 0 18px 48px rgba(39, 55, 120, .07);
+  }
+  .seo-document--localization #foreign .kg-callout > div { min-width: 0; }
+  .seo-document--localization #foreign .kg-callout h2 {
+    max-width: 15ch;
+    margin-bottom: 22px;
+    font-size: clamp(2.35rem, 3.3vw, 3.45rem);
+    line-height: 1.02;
+  }
+  .seo-document--localization #foreign .kg-callout p {
+    max-width: 66ch;
+    font-size: clamp(.92rem, 1.08vw, 1.02rem);
+    line-height: 1.65;
+  }
+  .seo-document--localization #foreign .kg-callout .kg-btn { margin-top: 28px; }
+  .seo-document--localization #foreign .kg-callout > img {
+    width: min(100%, 360px);
+    max-height: 360px;
+    justify-self: end;
+    object-fit: contain;
+    filter: saturate(.88);
+  }
+}
+
+@media (max-width: 840px) {
+  .seo-document--localization #foreign .kg-callout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .seo-document--localization #foreign .kg-callout > img {
+    width: min(72vw, 300px);
+    justify-self: center;
+  }
+}
+
+@media (max-width: 620px) {
+  .seo-document--localization #foreign .kg-callout {
+    gap: 24px;
+    padding: 26px 20px 28px;
+    border-radius: 16px;
+  }
+  .seo-document--localization #foreign .kg-callout h2 {
+    margin-bottom: 16px;
+    font-size: clamp(2rem, 10vw, 2.7rem);
+  }
+  .seo-document--localization #foreign .kg-callout .kg-btn {
+    width: 100%;
+    margin-top: 22px;
+  }
+  .seo-document--localization #foreign .kg-callout > img { width: min(74vw, 250px); }
+}
+
+/* Readable type scale for every SEO page. Keep the dense Figma composition,
+   but never use display-mockup sizes for real interface copy. */
+@layer components {
+  .seo-document .kg-breadcrumbs { font-size: 14px; }
+  .seo-document .kg-kicker { font-size: 14px; }
+  .seo-document .kg-lead { font-size: clamp(1rem, 1.35vw, 1.125rem); }
+
+  .seo-document .kg-hero :is(.kg-facts,.kg-stats,.kg-proof),
+  .seo-document .kg-hero :is(.kg-facts,.kg-stats,.kg-proof) span,
+  .seo-document .kg-hero :is(.kg-facts,.kg-stats,.kg-proof) span + span,
+  .seo-document .kg-hero :is(.kg-facts,.kg-stats,.kg-proof) b,
+  .seo-document--localization .kg-hero .kg-proof > div,
+  .seo-document--localization .kg-hero .kg-proof strong { font-size: 13px; }
+
+  .seo-document :is(.kg-field,.kg-range input),
+  .seo-document .kg-search button { font-size: 14px; }
+  .seo-document .kg-sidebar h3 { font-size: 20px; }
+  .seo-document .kg-filter-group b,
+  .seo-document .kg-checkline,
+  .seo-document .kg-filter-actions button,
+  .seo-document .kg-catalog-head .kg-sort,
+  .seo-document .kg-live-results { font-size: 14px !important; }
+
+  .seo-document .kg-voice::before { font-size: 11px; }
+  .seo-document .kg-voice h3 { font-size: 16px; }
+  .seo-document .kg-price { font-size: 14px; }
+  .seo-document :is(.kg-desc,.kg-speciality) { font-size: 14px; line-height: 1.5; }
+  .seo-document .kg-tag { font-size: 12px; }
+  .seo-document .kg-source-player { font-size: 13px; }
+  .seo-document .kg-voice-actions a { min-height: 38px; font-size: 13px; }
+
+  .seo-document .kg-cat { font-size: 13px; }
+  .seo-document .kg-section p { font-size: 16px; }
+  .seo-document .kg-intro { font-size: 18px; }
+  .seo-document .kg-note,
+  .seo-document .kg-mini,
+  .seo-document :is(.kg-related a,.kg-toc a) { font-size: 14px; }
+  .seo-document .kg-card h3,
+  .seo-document .kg-step h3 { font-size: 20px; }
+  .seo-document .kg-card p,
+  .seo-document .kg-step p { font-size: 16px; }
+
+  .seo-contact__copy > p:last-child { font-size: 16px; }
+  .seo-contact__form label { font-size: 15px; }
+  .seo-contact__actions p { font-size: 13px; }
+  .seo-footer h2,
+  .seo-footer p,
+  .seo-footer__grid > div:nth-child(3) > a { font-size: 15px; }
+  .seo-footer__bottom { font-size: 13px; }
+}
+
+@media (max-width: 680px) {
+  .seo-document h1 { font-size: clamp(2rem, 9.5vw, 2.75rem); }
+  .seo-document .kg-lead { font-size: 16px; line-height: 1.55; }
+  .seo-document .kg-hero :is(.kg-facts,.kg-stats,.kg-proof) span,
+  .seo-document .kg-hero :is(.kg-facts,.kg-stats,.kg-proof) span + span,
+  .seo-document .kg-hero :is(.kg-facts,.kg-stats,.kg-proof) b,
+  .seo-document--localization .kg-hero .kg-proof > div,
+  .seo-document--localization .kg-hero .kg-proof strong { font-size: 11px; }
+  .seo-document .kg-hero .kg-actions .kg-btn { min-height: 44px; font-size: 14px; }
+  .seo-document .kg-filter-toggle { font-size: 14px; }
+  .seo-document .kg-voice::before { font-size: 10px; }
+  .seo-document .kg-voice h3 { font-size: 15px; }
+  .seo-document .kg-price,
+  .seo-document :is(.kg-desc,.kg-speciality) { font-size: 13px; }
+  .seo-document .kg-section p { font-size: 15px; }
+}
