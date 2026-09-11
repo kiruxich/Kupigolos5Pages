@@ -208,6 +208,11 @@
       "degree": 4
     },
     {
+      "id": "components_seo_site_header_siteheader",
+      "label": "SiteHeader()",
+      "degree": 4
+    },
+    {
       "id": "lib_seo_documents_seodocuments",
       "label": "seoDocuments",
       "degree": 4
@@ -215,11 +220,6 @@
     {
       "id": "tsconfig_compileroptions_lib",
       "label": "lib",
-      "degree": 4
-    },
-    {
-      "id": "components_seo_site_header_siteheader",
-      "label": "SiteHeader()",
       "degree": 4
     }
   ],
