@@ -4,18 +4,6 @@
   "graph": {},
   "nodes": [
     {
-      "id": "lib_seo_page_config_seodocumentkey",
-      "label": "SeoDocumentKey",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 0,
-      "file_type": "code",
-      "norm_label": "seodocumentkey",
-      "source_file": "lib/seo-page-config.ts",
-      "source_location": "L3"
-    },
-    {
       "id": "lib_seo_page_config_seopagename",
       "label": "SeoPageName",
       "_callable": true,
@@ -28,12 +16,60 @@
       "source_location": "L43"
     },
     {
+      "id": "components_seo_site_header_headergroup",
+      "label": "HeaderGroup",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "code",
+      "norm_label": "headergroup",
+      "source_file": "components/seo/site-header.tsx",
+      "source_location": "L10"
+    },
+    {
+      "id": "components_seo_site_header_headerlink",
+      "label": "HeaderLink",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "code",
+      "norm_label": "headerlink",
+      "source_file": "components/seo/site-header.tsx",
+      "source_location": "L9"
+    },
+    {
+      "id": "components_seo_site_header_panelname",
+      "label": "PanelName",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "code",
+      "norm_label": "panelname",
+      "source_file": "components/seo/site-header.tsx",
+      "source_location": "L8"
+    },
+    {
+      "id": "lib_seo_page_config_seodocumentkey",
+      "label": "SeoDocumentKey",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 6,
+      "file_type": "code",
+      "norm_label": "seodocumentkey",
+      "source_file": "lib/seo-page-config.ts",
+      "source_location": "L3"
+    },
+    {
       "id": "components_seo_catalog_runtime_voicemeta",
       "label": "VoiceMeta",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 6,
+      "community": 7,
       "file_type": "code",
       "norm_label": "voicemeta",
       "source_file": "components/seo/catalog-runtime.tsx",
@@ -125,14 +161,58 @@
       "file_type": "code",
       "norm_label": "sitefooter()",
       "source_file": "components/seo/site-footer.tsx",
-      "source_location": "L24"
+      "source_location": "L26"
+    },
+    {
+      "id": "components_seo_site_header_headerpanel",
+      "label": "HeaderPanel()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "code",
+      "norm_label": "headerpanel()",
+      "source_file": "components/seo/site-header.tsx",
+      "source_location": "L54"
+    },
+    {
+      "id": "components_seo_site_header_siteheader",
+      "label": "SiteHeader()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "code",
+      "norm_label": "siteheader()",
+      "source_file": "components/seo/site-header.tsx",
+      "source_location": "L76"
+    },
+    {
+      "id": "components_seo_site_header_url",
+      "label": "url()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "code",
+      "norm_label": "url()",
+      "source_file": "components/seo/site-header.tsx",
+      "source_location": "L52"
+    },
+    {
+      "id": "app_page_pageindex",
+      "label": "PageIndex()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "file_type": "code",
+      "norm_label": "pageindex()",
+      "source_file": "app/page.tsx",
+      "source_location": "L5"
     },
     {
       "id": "components_seo_catalog_runtime_catalogruntime",
       "label": "CatalogRuntime()",
       "_callable": true,
       "_origin": "ast",
-      "community": 6,
+      "community": 7,
       "file_type": "code",
       "norm_label": "catalogruntime()",
       "source_file": "components/seo/catalog-runtime.tsx",
@@ -143,7 +223,7 @@
       "label": "normalized()",
       "_callable": true,
       "_origin": "ast",
-      "community": 6,
+      "community": 7,
       "file_type": "code",
       "norm_label": "normalized()",
       "source_file": "components/seo/catalog-runtime.tsx",
@@ -154,22 +234,11 @@
       "label": "priceFrom()",
       "_callable": true,
       "_origin": "ast",
-      "community": 6,
+      "community": 7,
       "file_type": "code",
       "norm_label": "pricefrom()",
       "source_file": "components/seo/catalog-runtime.tsx",
       "source_location": "L33"
-    },
-    {
-      "id": "app_page_pageindex",
-      "label": "PageIndex()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "file_type": "code",
-      "norm_label": "pageindex()",
-      "source_file": "app/page.tsx",
-      "source_location": "L32"
     },
     {
       "id": "app_layout_rootlayout",
@@ -181,28 +250,6 @@
       "norm_label": "rootlayout()",
       "source_file": "app/layout.tsx",
       "source_location": "L10"
-    },
-    {
-      "id": "components_seo_site_header_logo",
-      "label": "Logo()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "file_type": "code",
-      "norm_label": "logo()",
-      "source_file": "components/seo/site-header.tsx",
-      "source_location": "L3"
-    },
-    {
-      "id": "components_seo_site_header_siteheader",
-      "label": "SiteHeader()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "file_type": "code",
-      "norm_label": "siteheader()",
-      "source_file": "components/seo/site-header.tsx",
-      "source_location": "L14"
     },
     {
       "id": "app_diktory_dubbing_page",
@@ -382,7 +429,7 @@
       "file_type": "code",
       "norm_label": "expectations",
       "source_file": "tests/contracts/seo-pages.test.tsx",
-      "source_location": "L7"
+      "source_location": "L8"
     },
     {
       "id": "package_devdependencies",
@@ -595,30 +642,10 @@
       "source_location": "L28"
     },
     {
-      "id": "next_config",
-      "label": "next.config.ts",
-      "_origin": "ast",
-      "community": 10,
-      "file_type": "code",
-      "norm_label": "next.config.ts",
-      "source_file": "next.config.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "next_config_nextconfig",
-      "label": "nextConfig",
-      "_origin": "ast",
-      "community": 10,
-      "file_type": "code",
-      "norm_label": "nextconfig",
-      "source_file": "next.config.ts",
-      "source_location": "L3"
-    },
-    {
       "id": "next_env_d",
       "label": "next-env.d.ts",
       "_origin": "ast",
-      "community": 11,
+      "community": 10,
       "file_type": "code",
       "norm_label": "next-env.d.ts",
       "source_file": "next-env.d.ts",
@@ -628,7 +655,7 @@
       "id": "next_env_d_rationale_6",
       "label": "NOTE: This file should not be edited",
       "_origin": "ast",
-      "community": 11,
+      "community": 10,
       "file_type": "rationale",
       "norm_label": "note: this file should not be edited",
       "source_file": "next-env.d.ts",
@@ -638,7 +665,7 @@
       "id": "postcss_config",
       "label": "postcss.config.mjs",
       "_origin": "ast",
-      "community": 12,
+      "community": 11,
       "file_type": "code",
       "norm_label": "postcss.config.mjs",
       "source_file": "postcss.config.mjs",
@@ -648,7 +675,7 @@
       "id": "postcss_config_config",
       "label": "config",
       "_origin": "ast",
-      "community": 12,
+      "community": 11,
       "file_type": "code",
       "norm_label": "config",
       "source_file": "postcss.config.mjs",
@@ -658,7 +685,7 @@
       "id": "vitest_config",
       "label": "vitest.config.ts",
       "_origin": "ast",
-      "community": 13,
+      "community": 12,
       "file_type": "code",
       "norm_label": "vitest.config.ts",
       "source_file": "vitest.config.ts",
@@ -668,7 +695,7 @@
       "id": "vitest_setup",
       "label": "vitest.setup.ts",
       "_origin": "ast",
-      "community": 14,
+      "community": 13,
       "file_type": "code",
       "norm_label": "vitest.setup.ts",
       "source_file": "vitest.setup.ts",
@@ -885,6 +912,46 @@
       "source_location": "L1"
     },
     {
+      "id": "package_dependencies",
+      "label": "dependencies",
+      "_origin": "ast",
+      "community": 3,
+      "file_type": "code",
+      "norm_label": "dependencies",
+      "source_file": "package.json",
+      "source_location": "L13"
+    },
+    {
+      "id": "package_dependencies_next",
+      "label": "next",
+      "_origin": "ast",
+      "community": 3,
+      "file_type": "code",
+      "norm_label": "next",
+      "source_file": "package.json",
+      "source_location": "L14"
+    },
+    {
+      "id": "package_dependencies_react",
+      "label": "react",
+      "_origin": "ast",
+      "community": 3,
+      "file_type": "code",
+      "norm_label": "react",
+      "source_file": "package.json",
+      "source_location": "L15"
+    },
+    {
+      "id": "package_dependencies_react_dom",
+      "label": "react-dom",
+      "_origin": "ast",
+      "community": 3,
+      "file_type": "code",
+      "norm_label": "react-dom",
+      "source_file": "package.json",
+      "source_location": "L16"
+    },
+    {
       "id": "package_name",
       "label": "name",
       "_origin": "ast",
@@ -985,6 +1052,36 @@
       "source_location": "L3"
     },
     {
+      "id": "next",
+      "label": "next",
+      "_origin": "ast",
+      "community": 3,
+      "file_type": "concept",
+      "norm_label": "next",
+      "source_file": "package.json",
+      "source_location": "L14"
+    },
+    {
+      "id": "react",
+      "label": "react",
+      "_origin": "ast",
+      "community": 3,
+      "file_type": "concept",
+      "norm_label": "react",
+      "source_file": "package.json",
+      "source_location": "L15"
+    },
+    {
+      "id": "react_dom",
+      "label": "react-dom",
+      "_origin": "ast",
+      "community": 3,
+      "file_type": "concept",
+      "norm_label": "react-dom",
+      "source_file": "package.json",
+      "source_location": "L16"
+    },
+    {
       "id": "tsconfig",
       "label": "tsconfig.json",
       "_origin": "ast",
@@ -1075,80 +1172,70 @@
       "source_location": "L32"
     },
     {
-      "id": "package_dependencies",
-      "label": "dependencies",
+      "id": "components_seo_site_header",
+      "label": "site-header.tsx",
       "_origin": "ast",
       "community": 5,
       "file_type": "code",
-      "norm_label": "dependencies",
-      "source_file": "package.json",
-      "source_location": "L13"
+      "norm_label": "site-header.tsx",
+      "source_file": "components/seo/site-header.tsx",
+      "source_location": "L1"
     },
     {
-      "id": "package_dependencies_next",
-      "label": "next",
+      "id": "components_seo_site_header_panels",
+      "label": "panels",
       "_origin": "ast",
       "community": 5,
       "file_type": "code",
-      "norm_label": "next",
-      "source_file": "package.json",
-      "source_location": "L14"
+      "norm_label": "panels",
+      "source_file": "components/seo/site-header.tsx",
+      "source_location": "L12"
     },
     {
-      "id": "package_dependencies_react",
-      "label": "react",
+      "id": "app_page",
+      "label": "app/page.tsx",
       "_origin": "ast",
-      "community": 5,
+      "community": 6,
       "file_type": "code",
-      "norm_label": "react",
-      "source_file": "package.json",
-      "source_location": "L15"
+      "norm_label": "app/page.tsx",
+      "source_file": "app/page.tsx",
+      "source_location": "L1"
     },
     {
-      "id": "package_dependencies_react_dom",
-      "label": "react-dom",
+      "id": "lib_seo_pages",
+      "label": "seo-pages.ts",
       "_origin": "ast",
-      "community": 5,
+      "community": 6,
       "file_type": "code",
-      "norm_label": "react-dom",
-      "source_file": "package.json",
-      "source_location": "L16"
+      "norm_label": "seo-pages.ts",
+      "source_file": "lib/seo-pages.ts",
+      "source_location": "L1"
     },
     {
-      "id": "next",
-      "label": "next",
+      "id": "lib_seo_pages_seopages",
+      "label": "seoPages",
       "_origin": "ast",
-      "community": 5,
-      "file_type": "concept",
-      "norm_label": "next",
-      "source_file": "package.json",
-      "source_location": "L14"
+      "community": 6,
+      "file_type": "code",
+      "norm_label": "seopages",
+      "source_file": "lib/seo-pages.ts",
+      "source_location": "L3"
     },
     {
-      "id": "react",
-      "label": "react",
+      "id": "tests_contracts_page_index_test",
+      "label": "page-index.test.tsx",
       "_origin": "ast",
-      "community": 5,
-      "file_type": "concept",
-      "norm_label": "react",
-      "source_file": "package.json",
-      "source_location": "L15"
-    },
-    {
-      "id": "react_dom",
-      "label": "react-dom",
-      "_origin": "ast",
-      "community": 5,
-      "file_type": "concept",
-      "norm_label": "react-dom",
-      "source_file": "package.json",
-      "source_location": "L16"
+      "community": 6,
+      "file_type": "code",
+      "norm_label": "page-index.test.tsx",
+      "source_file": "tests/contracts/page-index.test.tsx",
+      "source_location": "L1"
     },
     {
       "id": "components_seo_catalog_runtime",
       "label": "catalog-runtime.tsx",
       "_origin": "ast",
-      "community": 6,
+      "community": 7,
       "file_type": "code",
       "norm_label": "catalog-runtime.tsx",
       "source_file": "components/seo/catalog-runtime.tsx",
@@ -1158,41 +1245,11 @@
       "id": "components_seo_catalog_runtime_women",
       "label": "women",
       "_origin": "ast",
-      "community": 6,
+      "community": 7,
       "file_type": "code",
       "norm_label": "women",
       "source_file": "components/seo/catalog-runtime.tsx",
       "source_location": "L13"
-    },
-    {
-      "id": "app_page",
-      "label": "app/page.tsx",
-      "_origin": "ast",
-      "community": 7,
-      "file_type": "code",
-      "norm_label": "app/page.tsx",
-      "source_file": "app/page.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "app_page_pages",
-      "label": "pages",
-      "_origin": "ast",
-      "community": 7,
-      "file_type": "code",
-      "norm_label": "pages",
-      "source_file": "app/page.tsx",
-      "source_location": "L4"
-    },
-    {
-      "id": "tests_contracts_page_index_test",
-      "label": "page-index.test.tsx",
-      "_origin": "ast",
-      "community": 7,
-      "file_type": "code",
-      "norm_label": "page-index.test.tsx",
-      "source_file": "tests/contracts/page-index.test.tsx",
-      "source_location": "L1"
     },
     {
       "id": "app_layout",
@@ -1215,14 +1272,24 @@
       "source_location": "L5"
     },
     {
-      "id": "components_seo_site_header",
-      "label": "site-header.tsx",
+      "id": "next_config",
+      "label": "next.config.ts",
       "_origin": "ast",
       "community": 9,
       "file_type": "code",
-      "norm_label": "site-header.tsx",
-      "source_file": "components/seo/site-header.tsx",
+      "norm_label": "next.config.ts",
+      "source_file": "next.config.ts",
       "source_location": "L1"
+    },
+    {
+      "id": "next_config_nextconfig",
+      "label": "nextConfig",
+      "_origin": "ast",
+      "community": 9,
+      "file_type": "code",
+      "norm_label": "nextconfig",
+      "source_file": "next.config.ts",
+      "source_location": "L3"
     }
   ],
   "links": [
@@ -1248,6 +1315,30 @@
       "context": "call",
       "source_file": "components/seo/catalog-runtime.tsx",
       "source_location": "L64",
+      "weight": 1.0
+    },
+    {
+      "source": "components_seo_site_header_headerpanel",
+      "target": "components_seo_site_header_url",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "components/seo/site-header.tsx",
+      "source_location": "L63",
+      "weight": 1.0
+    },
+    {
+      "source": "components_seo_site_header_siteheader",
+      "target": "components_seo_site_header_url",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "components/seo/site-header.tsx",
+      "source_location": "L109",
       "weight": 1.0
     },
     {
@@ -1455,6 +1546,18 @@
       "weight": 1.0
     },
     {
+      "source": "app_page",
+      "target": "lib_seo_pages_seopages",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
       "source": "app_perevod_page",
       "target": "components_seo_seo_page_seopage",
       "relation": "imports",
@@ -1551,6 +1654,18 @@
       "weight": 1.0
     },
     {
+      "source": "components_seo_site_header",
+      "target": "lib_seo_page_config_seodocumentkey",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "components/seo/site-header.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
       "source": "lib_seo_page_config",
       "target": "lib_seo_documents_seodocuments",
       "relation": "imports",
@@ -1559,6 +1674,18 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "lib/seo-page-config.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_seo_pages",
+      "target": "lib_seo_page_config_seodocumentkey",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/seo-pages.ts",
       "source_location": "L1",
       "weight": 1.0
     },
@@ -1744,7 +1871,7 @@
     },
     {
       "source": "tests_contracts_seo_pages_test",
-      "target": "lib_seo_documents_seodocuments",
+      "target": "components_seo_site_header_siteheader",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1756,7 +1883,7 @@
     },
     {
       "source": "tests_contracts_seo_pages_test",
-      "target": "lib_seo_page_config_seopageconfig",
+      "target": "lib_seo_documents_seodocuments",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1767,6 +1894,18 @@
       "weight": 1.0
     },
     {
+      "source": "tests_contracts_seo_pages_test",
+      "target": "lib_seo_page_config_seopageconfig",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "tests/contracts/seo-pages.test.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
       "source": "app_diktory_dubbing_page",
       "target": "components_seo_seo_page",
       "relation": "imports_from",
@@ -1860,6 +1999,18 @@
       "context": "import",
       "source_file": "app/diktory/zhenskie_golosa/page.tsx",
       "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page",
+      "target": "lib_seo_pages",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/page.tsx",
+      "source_location": "L2",
       "weight": 1.0
     },
     {
@@ -1947,6 +2098,18 @@
       "weight": 1.0
     },
     {
+      "source": "components_seo_site_header",
+      "target": "lib_seo_page_config",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "components/seo/site-header.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
       "source": "lib_seo_page_config",
       "target": "lib_seo_documents",
       "relation": "imports_from",
@@ -1955,6 +2118,18 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "lib/seo-page-config.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_seo_pages",
+      "target": "lib_seo_page_config",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "lib/seo-pages.ts",
       "source_location": "L1",
       "weight": 1.0
     },
@@ -1984,7 +2159,7 @@
     },
     {
       "source": "tests_contracts_seo_pages_test",
-      "target": "lib_seo_documents",
+      "target": "components_seo_site_header",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1996,7 +2171,7 @@
     },
     {
       "source": "tests_contracts_seo_pages_test",
-      "target": "lib_seo_page_config",
+      "target": "lib_seo_documents",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -2004,6 +2179,18 @@
       "context": "import",
       "source_file": "tests/contracts/seo-pages.test.tsx",
       "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_contracts_seo_pages_test",
+      "target": "lib_seo_page_config",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "tests/contracts/seo-pages.test.tsx",
+      "source_location": "L6",
       "weight": 1.0
     },
     {
@@ -2124,18 +2311,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/page.tsx",
-      "source_location": "L32",
-      "weight": 1.0
-    },
-    {
-      "source": "app_page",
-      "target": "app_page_pages",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "app/page.tsx",
-      "source_location": "L4",
+      "source_location": "L5",
       "weight": 1.0
     },
     {
@@ -2234,7 +2410,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/seo/site-footer.tsx",
-      "source_location": "L24",
+      "source_location": "L26",
       "weight": 1.0
     },
     {
@@ -2250,24 +2426,79 @@
     },
     {
       "source": "components_seo_site_header",
+      "target": "components_seo_site_header_headergroup",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/seo/site-header.tsx",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "components_seo_site_header",
+      "target": "components_seo_site_header_panels",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/seo/site-header.tsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "components_seo_site_header",
+      "target": "components_seo_site_header_url",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/seo/site-header.tsx",
+      "source_location": "L52",
+      "weight": 1.0
+    },
+    {
+      "source": "components_seo_site_header",
+      "target": "components_seo_site_header_headerpanel",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/seo/site-header.tsx",
+      "source_location": "L54",
+      "weight": 1.0
+    },
+    {
+      "source": "components_seo_site_header",
       "target": "components_seo_site_header_siteheader",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/seo/site-header.tsx",
-      "source_location": "L14",
+      "source_location": "L76",
       "weight": 1.0
     },
     {
       "source": "components_seo_site_header",
-      "target": "components_seo_site_header_logo",
+      "target": "components_seo_site_header_panelname",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/seo/site-header.tsx",
-      "source_location": "L3",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "components_seo_site_header",
+      "target": "components_seo_site_header_headerlink",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/seo/site-header.tsx",
+      "source_location": "L9",
       "weight": 1.0
     },
     {
@@ -2312,6 +2543,17 @@
       "confidence_score": 1.0,
       "source_file": "lib/seo-page-config.ts",
       "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_seo_pages",
+      "target": "lib_seo_pages_seopages",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/seo-pages.ts",
+      "source_location": "L3",
       "weight": 1.0
     },
     {
@@ -2619,7 +2861,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/contracts/seo-pages.test.tsx",
-      "source_location": "L7",
+      "source_location": "L8",
       "weight": 1.0
     },
     {
@@ -2844,5 +3086,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "b7b417995ab3d47c147f94229af6e9f152110992"
+  "built_at_commit": "50227323517d9213273e0950e0eb2e8102a73958"
 }
