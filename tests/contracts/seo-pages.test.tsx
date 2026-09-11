@@ -48,6 +48,16 @@ describe("SEO page content contracts", () => {
     expect(main.textContent).toContain("Скрыть договорные цены");
     expect(main.textContent).toContain("Показать без демо");
   });
+
+  it("enhances reviews and clients without replacing SEO copy", async () => {
+    const { container } = render(<CatalogRuntime html={seoDocuments.localization.html} documentKey="localization" />);
+
+    await waitFor(() => expect(container.querySelector(".kg-client-film-track")).toBeInTheDocument());
+    expect(screen.getByText("Здесь грамотные специалисты, большой выбор дикторов, всё сделали в срок и как надо. В процессе совместной творческой работы прислушивались к пожеланиям и всегда шли навстречу!")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Оставить отзыв" })).toHaveAttribute("href", "https://yandex.ru/maps/org/studiya_kupigolos/118434769430/reviews/");
+    expect(container.querySelectorAll(".kg-client-film-group")).toHaveLength(2);
+    expect(container.querySelector('[data-client-name="Л’Этуаль"]')).toHaveTextContent("Л’Этуаль");
+  });
 });
 
 describe("shared SEO header", () => {

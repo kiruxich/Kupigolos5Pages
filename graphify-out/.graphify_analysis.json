@@ -1,35 +1,6 @@
 {
   "communities": {
     "0": [
-      "app_diktory_dubbing_page",
-      "app_diktory_dubbing_page_dubbingpage",
-      "app_diktory_dubbing_page_metadata",
-      "app_diktory_izvestnye_golosa_page",
-      "app_diktory_izvestnye_golosa_page_famousvoicespage",
-      "app_diktory_izvestnye_golosa_page_metadata",
-      "app_diktory_page",
-      "app_diktory_page_diktorypage",
-      "app_diktory_page_metadata",
-      "app_diktory_zhenskie_golosa_page",
-      "app_diktory_zhenskie_golosa_page_metadata",
-      "app_diktory_zhenskie_golosa_page_womenvoicespage",
-      "app_perevod_page",
-      "app_perevod_page_localizationpage",
-      "app_perevod_page_metadata",
-      "components_seo_seo_page",
-      "components_seo_seo_page_seopage",
-      "components_seo_site_footer",
-      "components_seo_site_footer_contactsection",
-      "components_seo_site_footer_sitefooter",
-      "lib_seo_documents",
-      "lib_seo_documents_seodocuments",
-      "lib_seo_page_config",
-      "lib_seo_page_config_seopageconfig",
-      "lib_seo_page_config_seopagename",
-      "tests_contracts_seo_pages_test",
-      "tests_contracts_seo_pages_test_expectations"
-    ],
-    "1": [
       "jsdom",
       "package_devdependencies",
       "package_devdependencies_jsdom",
@@ -52,7 +23,7 @@
       "typescript",
       "vitest"
     ],
-    "2": [
+    "1": [
       "ref_dom",
       "ref_dom_iterable",
       "ref_esnext",
@@ -73,6 +44,27 @@
       "tsconfig_compileroptions_skiplibcheck",
       "tsconfig_compileroptions_strict",
       "tsconfig_compileroptions_target"
+    ],
+    "2": [
+      "components_seo_seo_page",
+      "components_seo_site_footer",
+      "components_seo_site_footer_contactsection",
+      "components_seo_site_footer_sitefooter",
+      "components_seo_site_header",
+      "components_seo_site_header_headergroup",
+      "components_seo_site_header_headerlink",
+      "components_seo_site_header_headerpanel",
+      "components_seo_site_header_panelname",
+      "components_seo_site_header_panels",
+      "components_seo_site_header_siteheader",
+      "components_seo_site_header_url",
+      "lib_seo_documents",
+      "lib_seo_documents_seodocuments",
+      "lib_seo_page_config",
+      "lib_seo_page_config_seodocumentkey",
+      "lib_seo_page_config_seopagename",
+      "tests_contracts_seo_pages_test",
+      "tests_contracts_seo_pages_test_expectations"
     ],
     "3": [
       "next",
@@ -95,6 +87,25 @@
       "react_dom"
     ],
     "4": [
+      "app_diktory_dubbing_page",
+      "app_diktory_dubbing_page_dubbingpage",
+      "app_diktory_dubbing_page_metadata",
+      "app_diktory_izvestnye_golosa_page",
+      "app_diktory_izvestnye_golosa_page_famousvoicespage",
+      "app_diktory_izvestnye_golosa_page_metadata",
+      "app_diktory_page",
+      "app_diktory_page_diktorypage",
+      "app_diktory_page_metadata",
+      "app_diktory_zhenskie_golosa_page",
+      "app_diktory_zhenskie_golosa_page_metadata",
+      "app_diktory_zhenskie_golosa_page_womenvoicespage",
+      "app_perevod_page",
+      "app_perevod_page_localizationpage",
+      "app_perevod_page_metadata",
+      "components_seo_seo_page_seopage",
+      "lib_seo_page_config_seopageconfig"
+    ],
+    "5": [
       "ref_next_dev_types_ts",
       "ref_next_env_d_ts",
       "ref_next_types_ts",
@@ -105,31 +116,21 @@
       "tsconfig_exclude",
       "tsconfig_include"
     ],
-    "5": [
-      "components_seo_site_header",
-      "components_seo_site_header_headergroup",
-      "components_seo_site_header_headerlink",
-      "components_seo_site_header_headerpanel",
-      "components_seo_site_header_panelname",
-      "components_seo_site_header_panels",
-      "components_seo_site_header_siteheader",
-      "components_seo_site_header_url"
-    ],
     "6": [
-      "app_page",
-      "app_page_pageindex",
-      "lib_seo_page_config_seodocumentkey",
-      "lib_seo_pages",
-      "lib_seo_pages_seopages",
-      "tests_contracts_page_index_test"
-    ],
-    "7": [
       "components_seo_catalog_runtime",
       "components_seo_catalog_runtime_catalogruntime",
+      "components_seo_catalog_runtime_clientlogos",
       "components_seo_catalog_runtime_normalized",
       "components_seo_catalog_runtime_pricefrom",
       "components_seo_catalog_runtime_voicemeta",
       "components_seo_catalog_runtime_women"
+    ],
+    "7": [
+      "app_page",
+      "app_page_pageindex",
+      "lib_seo_pages",
+      "lib_seo_pages_seopages",
+      "tests_contracts_page_index_test"
     ],
     "8": [
       "app_layout",
@@ -156,14 +157,14 @@
     ]
   },
   "cohesion": {
-    "0": 0.1396011396011396,
-    "1": 0.09523809523809523,
-    "2": 0.1,
+    "0": 0.09523809523809523,
+    "1": 0.1,
+    "2": 0.19298245614035087,
     "3": 0.1111111111111111,
-    "4": 0.2222222222222222,
-    "5": 0.32142857142857145,
-    "6": 0.4666666666666667,
-    "7": 0.4666666666666667,
+    "4": 0.14705882352941177,
+    "5": 0.2222222222222222,
+    "6": 0.38095238095238093,
+    "7": 0.6,
     "8": 0.6666666666666666,
     "9": 1.0,
     "10": 1.0,

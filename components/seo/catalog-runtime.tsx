@@ -26,6 +26,21 @@ const voiceMeta: Record<string, Partial<VoiceMeta>> = {
   "Ещё 200+ голосов": { age: "взрослый", timbre: "средний", category: "все", popularity: 0 },
 };
 
+const clientLogos: Record<string, string> = {
+  tefal: "https://kupigolos.ru/img/clients/tefal.jpg",
+  toyota: "https://kupigolos.ru/img/clients/toyota.jpg",
+  ikea: "https://kupigolos.ru/img/clients/ikea.jpg",
+  makita: "https://kupigolos.ru/img/clients/makita.png",
+  "авито": "https://kupigolos.ru/img/clients/avito.png",
+  "битрикс24": "https://kupigolos.ru/img/clients/bitrix-24.png",
+  fifa: "https://kupigolos.ru/img/clients/fifa.png",
+  unesco: "https://kupigolos.ru/img/clients/unesco.jpg",
+  "первый канал": "https://kupigolos.ru/img/clients/perviy-kanal.jpg",
+  "россия 24": "https://kupigolos.ru/img/clients/rossiya-24.png",
+  "mcdonald's": "https://kupigolos.ru/img/clients/mcdonalds.jpg",
+  "fix price": "https://kupigolos.ru/img/clients/fix-price.png",
+};
+
 function normalized(value: string | null | undefined) {
   return (value ?? "").trim().toLocaleLowerCase("ru-RU");
 }
@@ -42,11 +57,90 @@ export function CatalogRuntime({ html, documentKey }: { html: string; documentKe
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
+    const listeners: Array<() => void> = [];
+
+    root.querySelectorAll<HTMLElement>(".kg-review-grid").forEach((grid) => {
+      const section = grid.closest<HTMLElement>(".kg-source-block") ?? grid.closest<HTMLElement>(".kg-section");
+      const container = grid.parentElement;
+      if (!section || !container) return;
+
+      section.classList.add("kg-reviews-stage");
+      if (grid.children.length === 1) grid.classList.add("is-single");
+
+      const footer = document.createElement("div");
+      footer.className = "kg-review-footer";
+      footer.innerHTML = `
+        <span class="kg-review-sources">
+          <span>Яндекс Карты <strong>4,7</strong></span><i aria-hidden="true">·</i>
+          <span>Google <strong>4,9</strong></span><i aria-hidden="true">·</i>
+          <span>Zoon <strong>4,5</strong></span>
+        </span>
+        <a class="kg-review-action" href="https://yandex.ru/maps/org/studiya_kupigolos/118434769430/reviews/" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H9l-6 3V7a3 3 0 0 1 3-3Z"/><path d="M8 9h8M8 13h5"/></svg>
+          <span>Оставить отзыв</span>
+        </a>`;
+      container.append(footer);
+      listeners.push(() => {
+        footer.remove();
+        grid.classList.remove("is-single");
+        section.classList.remove("kg-reviews-stage");
+      });
+    });
+
+    root.querySelectorAll<HTMLElement>(".kg-client-names, .kg-logos").forEach((strip) => {
+      if (strip.classList.contains("is-film-enhanced")) return;
+      const section = strip.closest<HTMLElement>(".kg-source-block") ?? strip.closest<HTMLElement>(".kg-section");
+      const originalItems = [...strip.children] as HTMLElement[];
+      if (!section || !originalItems.length) return;
+
+      section.classList.add("kg-clients-stage");
+      const layout = section.matches(".kg-section") ? section.firstElementChild as HTMLElement | null : section;
+      layout?.classList.add("kg-clients-layout");
+      strip.classList.add("is-film-enhanced");
+      const track = document.createElement("div");
+      track.className = "kg-client-film-track";
+      const group = document.createElement("div");
+      group.className = "kg-client-film-group";
+
+      originalItems.forEach((item) => {
+        const name = item.textContent?.trim() ?? item.querySelector("img")?.getAttribute("alt") ?? "";
+        const logo = clientLogos[normalized(name)];
+        item.classList.add("kg-client-frame");
+        item.dataset.clientName = name;
+        if (logo && !item.querySelector("img")) {
+          const image = document.createElement("img");
+          image.src = logo;
+          image.alt = "";
+          image.loading = "lazy";
+          image.decoding = "async";
+          item.prepend(image);
+          item.classList.add("has-logo");
+        }
+        group.append(item);
+      });
+
+      const duplicate = group.cloneNode(true) as HTMLElement;
+      duplicate.setAttribute("aria-hidden", "true");
+      track.append(group, duplicate);
+      strip.append(track);
+
+      listeners.push(() => {
+        originalItems.forEach((item) => {
+          if (item.classList.contains("has-logo")) item.querySelector("img[alt='']")?.remove();
+          item.classList.remove("kg-client-frame", "has-logo");
+          delete item.dataset.clientName;
+        });
+        strip.replaceChildren(...originalItems);
+        strip.classList.remove("is-film-enhanced");
+        layout?.classList.remove("kg-clients-layout");
+        section.classList.remove("kg-clients-stage");
+      });
+    });
+
     const cards = [...root.querySelectorAll<HTMLElement>(".kg-voice")];
-    if (!cards.length) return;
+    if (!cards.length) return () => listeners.forEach((remove) => remove());
 
     let expanded = false;
-    const listeners: Array<() => void> = [];
     const on = <K extends keyof HTMLElementEventMap>(element: HTMLElement, event: K, handler: (event: HTMLElementEventMap[K]) => void) => {
       element.addEventListener(event, handler as EventListener);
       listeners.push(() => element.removeEventListener(event, handler as EventListener));
@@ -68,6 +162,7 @@ export function CatalogRuntime({ html, documentKey }: { html: string; documentKe
     live.className = "kg-live-results";
     live.setAttribute("aria-live", "polite");
     root.querySelector(".kg-catalog-head, .kg-catalog-note")?.append(live);
+    listeners.push(() => live.remove());
 
     const search = root.querySelector<HTMLInputElement>('.kg-search input[aria-label*="Поиск"], .kg-search input');
     const selects = [...root.querySelectorAll<HTMLSelectElement>(".kg-search select")];
