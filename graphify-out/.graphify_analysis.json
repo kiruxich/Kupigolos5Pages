@@ -183,6 +183,11 @@
       "degree": 7
     },
     {
+      "id": "components_seo_seo_page_seopage",
+      "label": "SeoPage()",
+      "degree": 6
+    },
+    {
       "id": "package_scripts",
       "label": "scripts",
       "degree": 6
@@ -190,11 +195,6 @@
     {
       "id": "tsconfig_include",
       "label": "include",
-      "degree": 6
-    },
-    {
-      "id": "components_seo_seo_page_seopage",
-      "label": "SeoPage()",
       "degree": 6
     },
     {

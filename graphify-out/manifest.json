@@ -84,10 +84,10 @@
     "semantic_hash": "3758eeaad34cab895d550d3cfb389b32"
   },
   "components/seo/site-header.tsx": {
-    "mtime": 1789120720.2228744,
-    "seen": 1789120962.6190941,
-    "ast_hash": "7217f71edcee79c28ccf590b04b55792",
-    "semantic_hash": "7217f71edcee79c28ccf590b04b55792"
+    "mtime": 1789121992.3517442,
+    "seen": 1789122048.833236,
+    "ast_hash": "ef0486c4611e70532dd5dc7cd1bd1591",
+    "semantic_hash": "ef0486c4611e70532dd5dc7cd1bd1591"
   },
   "lib/seo-documents.ts": {
     "mtime": 1788948905.0,

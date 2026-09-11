@@ -57,6 +57,14 @@
 .header-mega-feature i { margin-top: 22px; font-size: .75rem; font-style: normal; }
 .header-mega-info { grid-template-columns: repeat(2,1fr); min-height: 110px; }
 
+.header-networks-popover { top: calc(100% + 25px); right: auto; left: 50%; display: flex; width: 222px; height: 84px; align-items: center; gap: 15px; padding: 20px 30px; border: 0; border-radius: 15px; background: #f6f6f6; box-shadow: none; transform: translate(-50%,-7px); }
+.header-networks-popover.is-open { transform: translate(-50%,0); }
+.header-networks-popover a { position: relative; display: block; width: 44px; height: 44px; flex: 0 0 44px; overflow: hidden; padding: 0; border: 0; border-radius: 0; color: inherit; background: transparent; transform: none; }
+.header-networks-popover a:is(:hover,:focus-visible) { color: inherit; background: transparent; transform: none; }
+.header-network-icon { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: contain; transition: opacity .2s ease-in-out; }
+.header-network-icon-hover { z-index: 1; opacity: 0; }
+.header-networks-popover a:is(:hover,:focus-visible) .header-network-icon-hover { opacity: 1; }
+
 @media (min-width: 901px) {
   .header-mega-preprod { padding: 30px 40px 40px; }
   .preprod-header-menu { display: grid; grid-template-columns: 660px 260px; justify-content: space-between; align-items: start; }
