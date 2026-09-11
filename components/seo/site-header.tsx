@@ -17,9 +17,9 @@ const utilityLinks = [
 const primaryLinks = [
   ["Услуги", site],
   ["Дикторы", "/diktory"],
-  ["Школа вокала", `${site}/school/vocal`],
-  ["Рейтинги", `${site}/rating/msk/veduschie`],
+  ["ИИ сервисы", `${site}/ai`],
   ["Инфопортал", "https://info.kupigolos.ru/"],
+  ["Статьи", `${site}/articles`],
 ] as const;
 
 function TelegramIcon() {
@@ -36,6 +36,14 @@ function HeartIcon() {
 
 function AccountIcon() {
   return <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5" /><path d="M5.5 20c.4-4.1 2.6-6.2 6.5-6.2s6.1 2.1 6.5 6.2Z" /></svg>;
+}
+
+function PhoneIcon() {
+  return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.3c1.2.4 2.4.6 3.6.6a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.6 21 3 13.4 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 .9c.1 1.2.3 2.4.7 3.5a1 1 0 0 1-.3 1l-2.2 2.2Z" /></svg>;
+}
+
+function MessengerIcon() {
+  return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a7.4 7.4 0 0 1-8 7.4 8.5 8.5 0 0 1-3.3-.7L4 20l1.8-4.1A7.2 7.2 0 0 1 4.6 12 7.4 7.4 0 0 1 12 4.6a7.4 7.4 0 0 1 8 6.9Z" /></svg>;
 }
 
 export function SiteHeader({ documentKey: _documentKey }: { documentKey: SeoDocumentKey }) {
@@ -69,17 +77,25 @@ export function SiteHeader({ documentKey: _documentKey }: { documentKey: SeoDocu
           <div className="header-primary">
             <Link className="brand" href="/" aria-label="КупиГолос, на главную"><img src="/assets/kupigolos-logo-white.svg" alt="" width="109" height="51" /></Link>
             <nav className="site-nav" aria-label="Основная навигация">
-              {primaryLinks.map(([label, href]) => <a href={href} key={label}>{label}</a>)}
+              {primaryLinks.map(([label, href]) => <a className={label === "ИИ сервисы" ? "header-ai-link" : undefined} href={href} key={label}>{label === "ИИ сервисы" ? <i aria-hidden="true" /> : null}{label}</a>)}
             </nav>
-            <a className="header-quick-order" href="#contacts">Быстрый заказ</a>
-            <a className="header-phone" href="tel:88002004551"><strong>8 800 200-45-51</strong><span>Заказать звонок</span></a>
+            <div className="header-main-actions" aria-label="Быстрые действия">
+              <a className="header-round-action" href="tel:88002004551" aria-label="Позвонить"><PhoneIcon /></a>
+              <a className="header-round-action" href="https://telegram.dog/studio_kupigolos" target="_blank" rel="noopener" aria-label="Мессенджеры и социальные сети"><MessengerIcon /></a>
+              <a className="header-round-action" href={`${site}/favourites`} aria-label="Избранное в основном меню"><HeartIcon /></a>
+            </div>
             <button className="nav-toggle" type="button" onClick={() => setMobileOpen((value) => !value)} aria-expanded={mobileOpen} aria-controls="mobile-site-menu">
               <span className="nav-toggle-icon" aria-hidden="true"><i /><i /><i /></span><span className="sr-only">Открыть меню</span>
             </button>
           </div>
 
           <a className="header-partner" href="https://www.kinopoisk.ru/" target="_blank" rel="noopener">
-            <strong>КИНОПОИСК</strong><span aria-hidden="true">×</span><b>КУПИГОЛОС</b><span>Студия озвучивания с Кинопоиска</span>
+            <span className="header-partner-content">
+              <img src="/assets/Kinopoisk.svg" alt="Кинопоиск" width="85" height="11" />
+              <span className="header-partner-cross" aria-hidden="true">×</span>
+              <img src="/assets/Kupigolos.svg" alt="КупиГолос" width="60" height="27" />
+              <span className="header-partner-copy">Студия озвучивания с Кинопоиска</span>
+            </span>
           </a>
         </div>
       </header>
