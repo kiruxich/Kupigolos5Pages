@@ -1,6 +1,11 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import {
+  preprodVoiceCatalog,
+  preprodVoiceCatalogIdsByPage,
+  type VoiceCatalogEntry,
+} from "@/lib/voice-catalog.generated";
 
 type VoiceMeta = {
   gender: "мужской" | "женский";
@@ -11,6 +16,10 @@ type VoiceMeta = {
 };
 
 const women = new Set(["Татьяна Шитова", "Елена Соловьёва", "Юлия Рутберг", "Евдокия Лаврухина", "Ещё 200+ голосов"]);
+const voiceById: ReadonlyMap<string, VoiceCatalogEntry> = new Map(preprodVoiceCatalog.map((voice) => [voice.id, voice]));
+const womenVoiceIds = new Set<string>(preprodVoiceCatalogIdsByPage.women);
+const dubbingVoiceIds = new Set<string>(preprodVoiceCatalogIdsByPage.dubbing);
+const famousVoiceIds = new Set<string>(preprodVoiceCatalogIdsByPage.famous);
 const voiceMeta: Record<string, Partial<VoiceMeta>> = {
   "Илья Исаев": { age: "взрослый", timbre: "средний", category: "известные", popularity: 96 },
   "Владимир Зайцев": { age: "возрастной", timbre: "низкий", category: "известные", popularity: 100 },
@@ -119,6 +128,80 @@ function priceFrom(card: Element) {
   const text = card.querySelector(".kg-price")?.textContent ?? "";
   const amount = Number(text.replace(/\D/g, ""));
   return Number.isFinite(amount) && amount > 0 ? amount : Number.POSITIVE_INFINITY;
+}
+
+function voiceCatalogForPage(documentKey: string): readonly VoiceCatalogEntry[] {
+  const ids = (preprodVoiceCatalogIdsByPage as Record<string, readonly string[]>)[documentKey];
+  if (!ids) return [];
+  return ids.flatMap((id) => {
+    const voice = voiceById.get(id);
+    return voice ? [voice] : [];
+  });
+}
+
+function createVoiceCard(owner: Document, voice: VoiceCatalogEntry, related: readonly VoiceCatalogEntry[]) {
+  const card = owner.createElement("article");
+  card.className = "kg-voice kg-voice--catalog";
+  card.dataset.voiceId = voice.id;
+  card.innerHTML = `
+    <div class="kg-voice-toolbar">
+      <span class="kg-voice-favorite" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.7-7.5 1.1-1.1a5.5 5.5 0 0 0 0-7.8Z"/></svg></span>
+      <a class="kg-voice-download" target="_blank" rel="noopener noreferrer"><span class="sr-only">Скачать демо</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M4 16v3h16v-3"/></svg></a>
+      <span class="kg-voice-duration">—:—</span>
+      <span class="kg-voice-crown" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3 8 4 4 5-7 5 7 4-4-2 11H5L3 8Z"/></svg></span>
+    </div>
+    <div class="kg-voice-main">
+      <div class="kg-voice-portrait">
+        <img class="kg-avatar" loading="lazy" decoding="async">
+        <svg class="kg-progress-ring" viewBox="0 0 60 60" aria-hidden="true"><circle class="kg-progress-track" cx="30" cy="30" r="28.5"/><circle class="kg-progress-value" cx="30" cy="30" r="28.5" pathLength="100"/></svg>
+        <button class="kg-source-player" type="button" aria-pressed="false"><span class="kg-source-play" aria-hidden="true"></span></button>
+        <span class="kg-voice-related" aria-hidden="true"></span>
+      </div>
+      <div class="kg-voice-info">
+        <h3><a></a></h3>
+        <div class="kg-price"></div>
+        <p class="kg-desc"></p>
+        <a class="kg-voice-contact">Связаться</a>
+      </div>
+    </div>`;
+
+  const image = card.querySelector<HTMLImageElement>(".kg-avatar")!;
+  image.src = voice.image;
+  image.alt = `Диктор ${voice.name}`;
+  const download = card.querySelector<HTMLAnchorElement>(".kg-voice-download")!;
+  download.href = voice.audio;
+  download.setAttribute("aria-label", `Скачать демо: ${voice.name}`);
+  const player = card.querySelector<HTMLButtonElement>(".kg-source-player")!;
+  player.dataset.audioSrc = voice.audio;
+  player.dataset.audioLabel = voice.name;
+  player.setAttribute("aria-label", `Слушать голос ${voice.name}`);
+  const profile = card.querySelector<HTMLAnchorElement>("h3 a")!;
+  profile.href = voice.href;
+  profile.textContent = voice.name;
+  const price = card.querySelector<HTMLElement>(".kg-price")!;
+  const priceLabel = voice.price || "Узнать стоимость";
+  const amount = priceLabel.match(/(\d[\d\s]*\s₽)$/u);
+  if (amount?.index !== undefined) {
+    price.append(priceLabel.slice(0, amount.index));
+    const strong = owner.createElement("strong");
+    strong.textContent = amount[1]!;
+    price.append(strong);
+  } else {
+    price.textContent = priceLabel;
+  }
+  card.querySelector<HTMLElement>(".kg-desc")!.textContent = voice.description;
+  card.querySelector<HTMLAnchorElement>(".kg-voice-contact")!.href = voice.orderHref || voice.href;
+  card.querySelector<HTMLElement>(".kg-voice-crown")!.hidden = !voice.featured;
+  const relatedVoices = card.querySelector<HTMLElement>(".kg-voice-related")!;
+  related.slice(0, 2).forEach((item) => {
+    const relatedImage = owner.createElement("img");
+    relatedImage.src = item.image;
+    relatedImage.alt = "";
+    relatedImage.loading = "lazy";
+    relatedImage.decoding = "async";
+    relatedVoices.append(relatedImage);
+  });
+  return card;
 }
 
 export function CatalogRuntime({ html, documentKey }: { html: string; documentKey: string }) {
@@ -236,6 +319,17 @@ export function CatalogRuntime({ html, documentKey }: { html: string; documentKe
       });
     });
 
+    const pageCatalog = voiceCatalogForPage(documentKey);
+    const voiceGrid = root.querySelector<HTMLElement>(".kg-voices");
+    if (voiceGrid && pageCatalog.length) {
+      const fragment = document.createDocumentFragment();
+      pageCatalog.forEach((voice, index) => {
+        const related = [pageCatalog[(index + 1) % pageCatalog.length]!, pageCatalog[(index + 2) % pageCatalog.length]!];
+        fragment.append(createVoiceCard(document, voice, related));
+      });
+      voiceGrid.replaceChildren(fragment);
+    }
+
     const cards = [...root.querySelectorAll<HTMLElement>(".kg-voice")];
     if (!cards.length) return () => listeners.forEach((remove) => remove());
 
@@ -245,14 +339,49 @@ export function CatalogRuntime({ html, documentKey }: { html: string; documentKe
       listeners.push(() => element.removeEventListener(event, handler as EventListener));
     };
 
+    const audio = new Audio();
+    audio.preload = "metadata";
+    let activePlayer: HTMLElement | null = null;
+    const formatTime = (seconds: number) => `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, "0")}`;
+    const syncAudioUi = () => {
+      if (!activePlayer) return;
+      const card = activePlayer.closest<HTMLElement>(".kg-voice");
+      const duration = Number.isFinite(audio.duration) ? audio.duration : 0;
+      const progress = duration > 0 ? Math.min(100, audio.currentTime / duration * 100) : 0;
+      card?.style.setProperty("--voice-progress", String(progress));
+      const timer = card?.querySelector<HTMLElement>(".kg-voice-duration");
+      if (timer) timer.textContent = duration > 0 ? formatTime(duration) : "Загрузка…";
+    };
+    const stopAudio = (resetTime = false) => {
+      if (!audio.paused) audio.pause();
+      if (resetTime && Number.isFinite(audio.duration)) audio.currentTime = 0;
+      activePlayer?.classList.remove("is-playing");
+      activePlayer?.setAttribute("aria-pressed", "false");
+      if (resetTime) activePlayer?.closest<HTMLElement>(".kg-voice")?.style.setProperty("--voice-progress", "0");
+      activePlayer = null;
+    };
+    const listenToAudio = (event: string, handler: EventListener) => {
+      audio.addEventListener(event, handler);
+      listeners.push(() => audio.removeEventListener(event, handler));
+    };
+    listenToAudio("loadedmetadata", syncAudioUi);
+    listenToAudio("timeupdate", syncAudioUi);
+    listenToAudio("ended", () => stopAudio(true));
+    listenToAudio("error", () => stopAudio());
+    listeners.push(() => {
+      stopAudio();
+      audio.removeAttribute("src");
+    });
+
     cards.forEach((card, index) => {
       const name = card.querySelector("h3")?.textContent?.trim() ?? "";
       const preset = voiceMeta[name] ?? {};
-      card.dataset.gender = preset.gender ?? (women.has(name) ? "женский" : "мужской");
+      const voiceId = card.dataset.voiceId ?? "";
+      card.dataset.gender = preset.gender ?? (womenVoiceIds.has(voiceId) || women.has(name) ? "женский" : "мужской");
       card.dataset.age = preset.age ?? "взрослый";
       card.dataset.timbre = preset.timbre ?? "средний";
-      card.dataset.category = documentKey === "dubbing" ? "актеры дубляжа" : documentKey === "famous" ? "известные" : (preset.category ?? "известные");
-      card.dataset.popularity = String(preset.popularity ?? 80 - index);
+      card.dataset.category = dubbingVoiceIds.has(voiceId) ? "актеры дубляжа" : famousVoiceIds.has(voiceId) ? "известные" : (preset.category ?? "все");
+      card.dataset.popularity = String(preset.popularity ?? cards.length - index);
       card.dataset.hasDemo = String(Boolean(card.querySelector(".kg-source-player") || normalized(card.textContent).includes("демо")));
       card.dataset.price = String(priceFrom(card));
     });
@@ -347,11 +476,28 @@ export function CatalogRuntime({ html, documentKey }: { html: string; documentKe
       expanded = true;
       apply();
     }));
-    root.querySelectorAll<HTMLElement>(".kg-source-player, .kg-voice-actions a:first-child").forEach((player) => on(player, "click", (event) => {
-      if (normalized(player.textContent).includes("заказать")) return;
+    root.querySelectorAll<HTMLElement>(".kg-source-player[data-audio-src]").forEach((player) => on(player, "click", async (event) => {
       event.preventDefault();
-      const active = player.classList.toggle("is-playing");
-      player.setAttribute("aria-pressed", String(active));
+      if (activePlayer === player && !audio.paused) {
+        stopAudio();
+        return;
+      }
+      const source = player.dataset.audioSrc;
+      if (!source) return;
+      if (activePlayer && activePlayer !== player) stopAudio(true);
+      activePlayer = player;
+      player.classList.add("is-playing");
+      player.setAttribute("aria-pressed", "true");
+      const absoluteSource = new URL(source, document.baseURI).href;
+      if (audio.src !== absoluteSource) {
+        audio.src = source;
+        syncAudioUi();
+      }
+      try {
+        await audio.play();
+      } catch {
+        stopAudio();
+      }
     }));
     apply();
     return () => listeners.forEach((remove) => remove());

@@ -4,6 +4,7 @@ import { CatalogRuntime } from "@/components/seo/catalog-runtime";
 import { SiteHeader } from "@/components/seo/site-header";
 import { seoDocuments } from "@/lib/seo-documents";
 import { seoPageConfig } from "@/lib/seo-page-config";
+import { preprodVoiceCatalogIdsByPage } from "@/lib/voice-catalog.generated";
 
 const expectations = {
   diktory: { h1: "Дикторы для озвучки", sections: 12, faq: 7 },
@@ -136,17 +137,19 @@ describe("catalog interactions", () => {
   it("filters cards by name and resets the result", async () => {
     render(<CatalogRuntime html={seoDocuments.diktory.html} documentKey="diktory" />);
     const searchInput = screen.getByLabelText("Поиск диктора");
-    fireEvent.input(searchInput, { target: { value: "Татьяна" } });
+    fireEvent.input(searchInput, { target: { value: "Татьяна Шитова" } });
     await waitFor(() => expect(screen.getByText("Найдено: 1")).toBeInTheDocument());
     expect(screen.getByRole("heading", { name: "Татьяна Шитова" }).closest("article")).toBeVisible();
     fireEvent.click(screen.getByRole("button", { name: "Сбросить" }));
-    await waitFor(() => expect(screen.getByText("Найдено: 6")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText(`Найдено: ${preprodVoiceCatalogIdsByPage.diktory.length}`)).toBeInTheDocument());
   });
 
   it("filters the provided cards by gender", async () => {
-    render(<CatalogRuntime html={seoDocuments.diktory.html} documentKey="diktory" />);
+    const { container } = render(<CatalogRuntime html={seoDocuments.diktory.html} documentKey="diktory" />);
+    const womenIds = new Set<string>(preprodVoiceCatalogIdsByPage.women);
+    const womenInMainCatalog = preprodVoiceCatalogIdsByPage.diktory.filter((id) => womenIds.has(id)).length;
     fireEvent.change(screen.getByLabelText("Пол"), { target: { value: "Женский" } });
-    await waitFor(() => expect(screen.getByText("Найдено: 1")).toBeInTheDocument());
-    expect(screen.getByRole("heading", { name: "Татьяна Шитова" }).closest("article")).toBeVisible();
+    await waitFor(() => expect(screen.getByText(`Найдено: ${womenInMainCatalog}`)).toBeInTheDocument());
+    expect(container.querySelectorAll(".kg-voice:not([hidden])")).toHaveLength(15);
   });
 });
